@@ -389,7 +389,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    349
+                    421
                 </div>
                 
 
@@ -434,11 +434,17 @@
 <p><img src="/picture/shell/1708487676052.png"></p>
 <p>“ “ + $ <strong>仍</strong>会取变量值</p>
 <p>‘ ‘ 和 \ 则会<strong>取消</strong>$的作用</p>
-<h4 id="4-2环境变量"><a href="#4-2环境变量" class="headerlink" title="4.2环境变量"></a>4.2环境变量</h4><p>​	环境变量就是已经被赋予初始值的变量。</p>
+<h5 id="4-1-2环境变量"><a href="#4-1-2环境变量" class="headerlink" title="4.1.2环境变量"></a>4.1.2环境变量</h5><p>​	环境变量就是已经被赋予初始值的变量。</p>
 <p><img src="/picture/shell/1708487961997.png"></p>
-<h4 id="4-3参数变量"><a href="#4-3参数变量" class="headerlink" title="4.3参数变量"></a>4.3参数变量</h4><p>​	如果脚本程序在调用时带有参数，那么一些参数变量就会被创建。即使未传递任何值，它也<strong>存在为0</strong>。</p>
+<h5 id="4-1-3参数变量"><a href="#4-1-3参数变量" class="headerlink" title="4.1.3参数变量"></a>4.1.3参数变量</h5><p>​	如果脚本程序在调用时带有参数，那么一些参数变量就会被创建。即使未传递任何值，它也<strong>存在为0</strong>。</p>
 <p><img src="/picture/shell/1708488156049.png"></p>
+<h4 id="4-2条件"><a href="#4-2条件" class="headerlink" title="4.2条件"></a>4.2条件</h4><p>​	test或[]命令</p>
+<p>检查文件是否存在示例：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">if test -f my.sh</span><br><span class="line">then</span><br><span class="line">	...</span><br><span class="line">fi</span><br><span class="line">也可以写成:</span><br><span class="line">if [ -f my.sh ]</span><br><span class="line">then</span><br><span class="line">	...</span><br><span class="line">fi</span><br></pre></td></tr></table></figure>
 
+<p>test命令可以使用的条件类型：字符串比较、算术比较、与文件相关的测试。</p>
+<p><img src="/picture/shell/1708490046253.png" alt="test使用的类型"></p>
+<h4 id="4-3控制结构"><a href="#4-3控制结构" class="headerlink" title="4.3控制结构"></a>4.3控制结构</h4>
                 
             </div>
             <hr/>
