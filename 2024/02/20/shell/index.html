@@ -389,7 +389,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    421
+                    1.1k
                 </div>
                 
 
@@ -444,7 +444,69 @@
 
 <p>test命令可以使用的条件类型：字符串比较、算术比较、与文件相关的测试。</p>
 <p><img src="/picture/shell/1708490046253.png" alt="test使用的类型"></p>
-<h4 id="4-3控制结构"><a href="#4-3控制结构" class="headerlink" title="4.3控制结构"></a>4.3控制结构</h4>
+<h4 id="4-3控制结构"><a href="#4-3控制结构" class="headerlink" title="4.3控制结构"></a>4.3控制结构</h4><h5 id="if-elseif示例"><a href="#if-elseif示例" class="headerlink" title="if-elseif示例:"></a>if-elseif示例:</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">echo &quot;input&quot;</span><br><span class="line">read line</span><br><span class="line">if [ &quot;$line&quot; -lt 0 ] || [ &quot;$line&quot; -gt 100 ]</span><br><span class="line">then</span><br><span class="line">	echo &quot;参数不合法&quot;</span><br><span class="line">	exit 1</span><br><span class="line">fi</span><br><span class="line"></span><br><span class="line">if [ &quot;$line&quot; -ge 80 ]</span><br><span class="line">then</span><br><span class="line">	echo &quot;A&quot;</span><br><span class="line">elif [ &quot;$line&quot; -ge 70 ]</span><br><span class="line">then</span><br><span class="line">	echo &quot;B&quot;</span><br><span class="line">elif [ &quot;$line&quot; -ge 60 ]</span><br><span class="line">then</span><br><span class="line">	echo &quot;C&quot;</span><br><span class="line">else</span><br><span class="line">	echo &quot;D&quot;</span><br><span class="line">fi</span><br></pre></td></tr></table></figure>
+
+<h5 id="for循环"><a href="#for循环" class="headerlink" title="for循环"></a>for循环</h5><p><img src="/picture/shell/1708567007080.png"></p>
+<p><img src="/picture/shell/1708567024437.png"></p>
+<p>注意:in 后面所跟参数为 i 取值如果用双引号引起来，那么 i 只取”hello abc 123”一个值。</p>
+<p>假如循环条件是一个命令的话，解释器会产生疑惑，判定这个所谓的命令是一个字符串。</p>
+<p><img src="/picture/shell/1708567737456.png"></p>
+<p><img src="/picture/shell/1708567758580.png"></p>
+<p>只需要加一个反引号&#96;&#96;就可以解决这种问题：</p>
+<p><img src="/picture/shell/1708567808781.png"></p>
+<p><img src="/picture/shell/1708567827780.png" alt="1708567827780"></p>
+<h5 id="while循环"><a href="#while循环" class="headerlink" title="while循环"></a>while循环</h5><p>死循环：以下四种写法都可以满足死循环</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash"><span class="keyword">while</span> [ 1 = 1 ]</span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash"><span class="keyword">while</span> <span class="literal">true</span></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash"><span class="keyword">while</span> [ : ]</span></span><br><span class="line">while echo &quot;hello&quot;</span><br><span class="line">do</span><br><span class="line">    echo &quot;run&quot;</span><br><span class="line">    sleep 1</span><br><span class="line">done</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><img src="/picture/shell/1708568461702.png"></p>
+<p>示例：判断密码输入，三次错误则退出。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">a=1</span><br><span class="line">while true</span><br><span class="line">do</span><br><span class="line">    echo input</span><br><span class="line">    read line</span><br><span class="line">    </span><br><span class="line">    if [ $line =  &quot;12345&quot; ]</span><br><span class="line">    then</span><br><span class="line">        echo &quot;OK&quot;</span><br><span class="line">        break</span><br><span class="line">    fi</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    if [ $a = 3 ]</span><br><span class="line">    then</span><br><span class="line">       echo &quot;err&quot;</span><br><span class="line">       exit 1</span><br><span class="line">    fi</span><br><span class="line"></span><br><span class="line">    a=`expr $a + 1` </span><br><span class="line">done   </span><br></pre></td></tr></table></figure>
+
+<h5 id="until"><a href="#until" class="headerlink" title="until"></a>until</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">until condition</span><br><span class="line">do</span><br><span class="line">	statements</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="case选择"><a href="#case选择" class="headerlink" title="case选择"></a>case选择</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">echo &quot;input&quot;</span><br><span class="line">read line</span><br><span class="line"></span><br><span class="line">case &quot;$line&quot; in</span><br><span class="line">    yes) echo &quot;this is yes&quot;;;</span><br><span class="line">    no) echo &quot;this is no&quot;;;</span><br><span class="line">    *) echo &quot;***&quot;;;  #*可以和任意条件匹配</span><br><span class="line">esac</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><img src="/picture/shell/1708571322376.png"></p>
+<h3 id="5-脚本调用"><a href="#5-脚本调用" class="headerlink" title="5.脚本调用"></a>5.脚本调用</h3><p>通过<strong>传参</strong>进行参数传递：</p>
+<p><img src="/picture/shell/1708928417825.png"></p>
+<p>通过<strong>环境变量</strong>传递：</p>
+<p><img src="/picture/shell/1708928701677.png"></p>
+<p>以点命令执行：（<strong>source</strong> 等同于 <strong>.</strong> ）</p>
+<p><img src="/picture/shell/1708928960673.png"></p>
+<p>a、b都在同一个解释器里执行，在b中的操作会改变a.</p>
+<p>点命令执行不会重新打开一个解释器，如遇到环境变量、exit要注意使用否则可能会直接关闭当前解释器。</p>
+<h3 id="6-c程序调用脚本"><a href="#6-c程序调用脚本" class="headerlink" title="6.c程序调用脚本"></a>6.c程序调用脚本</h3><p>main.c</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">include &lt;stdio.h&gt;</span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">include &lt;stdlib.h&gt;</span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">include &lt;unistd.h&gt;</span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">include &lt;string.h&gt;</span></span><br><span class="line"></span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line"> printf(&quot;main pid=%d\n&quot;, getpid());</span><br><span class="line"> pid_t pid = fork();</span><br><span class="line"></span><br><span class="line"> if(pid == -1 )</span><br><span class="line"> &#123;</span><br><span class="line">    exit(1);</span><br><span class="line"> &#125;</span><br><span class="line"> if(pid == 0)</span><br><span class="line"> &#123;</span><br><span class="line">    printf(&quot;child pid=%d\n&quot;, getpid());</span><br><span class="line">     execl(&quot;./d.sh&quot;, &quot;d.sh&quot;, (char*)0);</span><br><span class="line"> &#125;</span><br><span class="line"> exit(0);</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>d.sh</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">!/usr/bin/bash</span></span><br><span class="line">echo &quot;d.sh pid=$$&quot;</span><br></pre></td></tr></table></figure>
+
+<p>运行结果:</p>
+<p><img src="/picture/shell/1708930623832.png"></p>
+<h3 id="7-awk"><a href="#7-awk" class="headerlink" title="7.awk"></a>7.awk</h3><p>示例文件：</p>
+<p> <img src="/picture/shell/1708931478595.png"></p>
+<p>打印第一列:</p>
+<p><img src="/picture/shell/1708931535737.png"></p>
+<p>重定向打印:</p>
+<p><img src="/picture/shell/1708931565936.png"></p>
+<p>打印$3等于0的：</p>
+<p><img src="/picture/shell/1708934134858.png"></p>
+<p>添加描述信息:</p>
+<p><img src="/picture/shell/1708934478642.png"></p>
+<h3 id="8-sed"><a href="#8-sed" class="headerlink" title="8.sed"></a>8.sed</h3><p>非交互性文本编辑器(vi是交互型)</p>
+<p>例如有三行数据，把新数据插入第一行后面()<img src="/picture/shell/1708936028113.png"></p>
+<p>一到三增加<img src="/picture/shell/1708936098941.png"></p>
+<p>打印某几行到新文件<img src="/picture/shell/1708936555402.png"></p>
+<h3 id="9-一个脚本示例"><a href="#9-一个脚本示例" class="headerlink" title="9.一个脚本示例"></a>9.一个脚本示例</h3><p>编写一个脚本关闭关闭后台包含”sleep”的所有进程</p>
+<p><img src="/picture/shell/1708938605973.png"></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">!/usr/bin/bash</span></span><br><span class="line"></span><br><span class="line">pids=`ps -ef | grep sleep | grep -v grep | awk &#x27;&#123;print $2&#125;&#x27;`</span><br><span class="line"></span><br><span class="line">if [ -z &quot;$pids&quot; ]</span><br><span class="line">then</span><br><span class="line">    echo &quot;没有找到进程&quot;</span><br><span class="line">    exit 0</span><br><span class="line">fi</span><br><span class="line"></span><br><span class="line">for pid in $pids</span><br><span class="line">do</span><br><span class="line">    kill $pid</span><br><span class="line">    echo &quot;进程$pid 已结束&quot;</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
+
+<img src="/picture/shell/1708938627457.png" style="zoom:150%;" />
+
+<p><img src="/picture/shell/1708938653020.png"></p>
+
                 
             </div>
             <hr/>
