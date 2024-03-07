@@ -1,0 +1,1216 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="c++基础知识, EVEN&#39;s new bolg">
+    <meta name="description" content="1.初始化列表c++中引入的初始化方式，使用**{}**来对变量初始化。
+123456789101112131415#include &amp;lt;iostream&amp;gt;using namespace std;int main()&amp;#123;	">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <title>c++基础知识 | EVEN&#39;s new bolg</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+    
+
+
+    <!-- bg-cover style     -->
+
+
+
+<link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
+<link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+<link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+<link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+<link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+<link rel="stylesheet" type="text/css" href="/css/matery.css">
+<link rel="stylesheet" type="text/css" href="/css/my.css">
+<link rel="stylesheet" type="text/css" href="/css/dark.css" media="none" onload="if(media!='all')media='all'">
+
+
+
+
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+    <link rel="stylesheet" href="/css/post.css">
+
+
+
+
+    
+
+
+
+    <script src="/libs/jquery/jquery-3.6.0.min.js"></script>
+
+<meta name="generator" content="Hexo 7.1.1"></head>
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">EVEN&#39;s new bolg</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>标签</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>分类</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>归档</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/contact" class="waves-effect waves-light">
+      
+      <i class="fas fa-comments" style="zoom: 0.6;"></i>
+      
+      <span>留言板</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/friends" class="waves-effect waves-light">
+      
+      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
+      
+      <span>友情链接</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+  <li>
+    <a href="javascript:;" class="waves-effect waves-light" onclick="switchNightMode()" title="深色/浅色模式" >
+      <i id="sum-moon-icon" class="fas fa-sun" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">EVEN&#39;s new bolg</div>
+        <div class="logo-desc">
+            
+            program study
+            
+        </div>
+    </div>
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			标签
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			分类
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			归档
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/contact" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-comments"></i>
+			
+			留言板
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/friends" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-address-book"></i>
+			
+			友情链接
+		</a>
+          
+        </li>
+        
+        
+        <li><div class="divider"></div></li>
+        <li>
+            <a href="https://github.com/blinkfox/hexo-theme-matery" class="waves-effect waves-light" target="_blank">
+                <i class="fab fa-github-square fa-fw"></i>Fork Me
+            </a>
+        </li>
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+            <style>
+    .nav-transparent .github-corner {
+        display: none !important;
+    }
+
+    .github-corner {
+        position: absolute;
+        z-index: 10;
+        top: 0;
+        right: 0;
+        border: 0;
+        transform: scale(1.1);
+    }
+
+    .github-corner svg {
+        color: #0f9d58;
+        fill: #fff;
+        height: 64px;
+        width: 64px;
+    }
+
+    .github-corner:hover .octo-arm {
+        animation: a 0.56s ease-in-out;
+    }
+
+    .github-corner .octo-arm {
+        animation: none;
+    }
+
+    @keyframes a {
+        0%,
+        to {
+            transform: rotate(0);
+        }
+        20%,
+        60% {
+            transform: rotate(-25deg);
+        }
+        40%,
+        80% {
+            transform: rotate(10deg);
+        }
+    }
+</style>
+
+<a href="https://github.com/blinkfox/hexo-theme-matery" class="github-corner tooltipped hide-on-med-and-down" target="_blank"
+   data-tooltip="Fork Me" data-position="left" data-delay="50">
+    <svg viewBox="0 0 250 250" aria-hidden="true">
+        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+        <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+              fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path>
+        <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+              fill="currentColor" class="octo-body"></path>
+    </svg>
+</a>
+        
+    </nav>
+
+</header>
+
+    
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/22.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">c++基础知识</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/c/">
+                                <span class="chip bg-color">c++</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2024-02-27
+                </div>
+                
+
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
+                    2.7k
+                </div>
+                
+
+                
+
+                
+            </div>
+        </div>
+        <hr class="clearfix">
+
+        
+
+        
+
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h3 id="1-初始化列表"><a href="#1-初始化列表" class="headerlink" title="1.初始化列表"></a>1.初始化列表</h3><p>c++中引入的初始化方式，使用**{}**来对变量初始化。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="type">int</span> a = <span class="number">0</span>;</span><br><span class="line">	<span class="function"><span class="type">int</span> <span class="title">b</span><span class="params">(<span class="number">0</span>)</span></span>;</span><br><span class="line">	<span class="type">int</span> c = <span class="built_in">int</span>();</span><br><span class="line">	<span class="comment">//C11</span></span><br><span class="line">	<span class="type">int</span> d = &#123; &#125;;</span><br><span class="line">	<span class="type">int</span> e&#123;&#125;;</span><br><span class="line">	<span class="type">int</span> f = <span class="type">int</span>&#123;&#125;;</span><br><span class="line">	cout &lt;&lt; <span class="string">&quot;hello, world!&quot;</span> &lt;&lt; endl;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>注意如果变量类型不一致，使用初始化列表需要<strong>明确强制转换</strong>：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">float</span> ft = <span class="number">1.22</span>;</span><br><span class="line"><span class="type">int</span> a = &#123; (<span class="type">int</span>)ft &#125;;</span><br><span class="line">retrun <span class="number">0</span>;</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-输入输出"><a href="#2-输入输出" class="headerlink" title="2.输入输出"></a>2.输入输出</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">char</span> str[<span class="number">20</span>];</span><br><span class="line"><span class="comment">//cin &gt;&gt; str;//这里输入以空格结束 如abc 123 str只能保存abc</span></span><br><span class="line">cin.<span class="built_in">getline</span>(str, <span class="number">20</span>);<span class="comment">//这样便可以解决问题</span></span><br><span class="line">cin.<span class="built_in">getline</span>(str, <span class="number">20</span>, <span class="string">&#x27;#&#x27;</span>);<span class="comment">//以#作为结束标志</span></span><br><span class="line">cout &lt;&lt; str &lt;&lt; endl;</span><br></pre></td></tr></table></figure>
+
+<p>cin是以空格为结束标志。</p>
+<h3 id="3-const"><a href="#3-const" class="headerlink" title="3.const"></a>3.const</h3><p>在c语言中const以变量为主，而在c++中以常量为主：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//c:</span></span><br><span class="line"><span class="type">const</span> <span class="type">int</span> n = <span class="number">10</span>;</span><br><span class="line"><span class="type">int</span> arr[n] = &#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">34</span>,<span class="number">5</span>&#125;;	<span class="comment">//err</span></span><br><span class="line"><span class="comment">//c++</span></span><br><span class="line"><span class="type">const</span> <span class="type">int</span> n = <span class="number">10</span>;</span><br><span class="line"><span class="type">int</span> arr[n] = &#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">34</span>,<span class="number">5</span>&#125;;	<span class="comment">//ok</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="4-const指针"><a href="#4-const指针" class="headerlink" title="4.const指针"></a>4.const指针</h3><p>const与指针的关系:</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> a = <span class="number">10</span>, b = <span class="number">20</span>;</span><br><span class="line"><span class="type">const</span> <span class="type">int</span>* p1 = &amp;a;<span class="comment">//const修饰指向  *p1 = 100 error</span></span><br><span class="line"><span class="comment">//int const* p2 = &amp;a; //与上面等价</span></span><br><span class="line"><span class="type">int</span>* <span class="type">const</span> p3 = &amp;b;<span class="comment">//const修饰指针   p3 = &amp;a error</span></span><br></pre></td></tr></table></figure>
+
+<p>常变量与指针:</p>
+<p>这里要注意的是const必须<strong>修饰了指针的指向</strong>才能把常变量赋值给指针。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">const</span> <span class="type">int</span> a = <span class="number">20</span>;</span><br><span class="line"><span class="type">int</span>*p = &amp;a;<span class="comment">//err</span></span><br><span class="line"><span class="type">const</span> <span class="type">int</span>*p = &amp;a;<span class="comment">//ok</span></span><br><span class="line"><span class="type">int</span>* <span class="type">const</span> p = &amp;a;<span class="comment">//err</span></span><br><span class="line"><span class="type">const</span> <span class="type">int</span>* <span class="type">const</span> p = &amp;a;<span class="comment">//ok</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//如果强制转换</span></span><br><span class="line"><span class="type">int</span>* p = (<span class="type">int</span>*)&amp;a;</span><br><span class="line">*p = <span class="number">100</span>;</span><br><span class="line"><span class="type">int</span> x = a;<span class="comment">//这里x还是20  不安全</span></span><br></pre></td></tr></table></figure>
+
+<p>同类型指针的赋值兼容：</p>
+<p>结论:能力强的指针能赋值给能力弱的指针。</p>
+<p>也就是  <em><em>const int</em> &#x3D; int</em>** 正确</p>
+<p>而 <strong>int * &#x3D; const int</strong>* 错误</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> a = <span class="number">10</span>, b = <span class="number">10</span>;</span><br><span class="line"><span class="type">const</span> <span class="type">int</span>* s = &amp;a;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span>* p1 = s; <span class="comment">//err	 相当于int* = const int* 明显不符合结论</span></span><br><span class="line"><span class="type">const</span> <span class="type">int</span>* p2 = s;<span class="comment">//ok   const int* = const int*</span></span><br><span class="line"><span class="type">int</span>* <span class="type">const</span> p3 = s; <span class="comment">//err   int* = const int*</span></span><br><span class="line"><span class="type">const</span> <span class="type">int</span>* <span class="type">const</span> p4 = s;<span class="comment">//ok</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>这里如何判断其类型？</p>
+<p>*****之前所包含的类型就是变量类型</p>
+</blockquote>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> a = <span class="number">10</span>, b = <span class="number">10</span>;</span><br><span class="line"><span class="type">int</span>* <span class="type">const</span> s = &amp;a;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span>* p1 = s;	<span class="comment">//相当于把a的地址给了p1  int* = int* ok</span></span><br><span class="line"><span class="type">const</span> <span class="type">int</span>* p2 = s; <span class="comment">//const int* = int* ok</span></span><br><span class="line"><span class="type">int</span>* <span class="type">const</span> p3 = s; <span class="comment">//int* = int*  ok</span></span><br><span class="line"><span class="type">const</span> <span class="type">int</span>* <span class="type">const</span> p4 = s;<span class="comment">//ok</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="5-引用"><a href="#5-引用" class="headerlink" title="5.引用"></a>5.引用</h3><p>引用就是某个已有的变量的别称。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">int</span> a = <span class="number">10</span>;</span><br><span class="line">    <span class="type">int</span> b = a;</span><br><span class="line">    <span class="type">int</span>&amp; c = a;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>特点：</p>
+<ol>
+<li><p>定义引用必须初始化</p>
+</li>
+<li><p>指针有空指针，引用无空引用。</p>
+</li>
+<li><p>指针有多级指针，引用只有一级引用。</p>
+</li>
+<li><p>指针“sizeof”得到的是指针变量的大小，引用得到的是变量大小。</p>
+</li>
+<li><p>指针作为函数形参要判空，引用不必。</p>
+</li>
+<li><p>指针需要额外分配内存，引用不必。</p>
+</li>
+<li><p>指针需要解引用，引用不必。</p>
+</li>
+<li><p>指针的值可以发生改变，引用不必。</p>
+</li>
+<li><p>++指针与++引用效果不同。(指针是地址加一，引用是变量值加一)</p>
+<p>const与引用</p>
+</li>
+</ol>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//const与引用</span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="type">int</span> a = <span class="number">10</span>;</span><br><span class="line">	<span class="type">int</span>&amp; b = a;</span><br><span class="line">	b += <span class="number">10</span>;</span><br><span class="line">	<span class="type">int</span> <span class="type">const</span>&amp; c = a;	<span class="comment">//常引用  c+=100; err!</span></span><br><span class="line">	cout &lt;&lt; c &lt;&lt; endl;</span><br><span class="line"></span><br><span class="line">	<span class="type">int</span>&amp; <span class="type">const</span> x = a;	<span class="comment">//const被忽略 </span></span><br><span class="line">	x += <span class="number">100</span>;			<span class="comment">//可以了</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="type">int</span> a = <span class="number">100</span>;</span><br><span class="line">    <span class="type">const</span> <span class="type">int</span> b = <span class="number">200</span>;</span><br><span class="line">    <span class="type">const</span> <span class="type">int</span>&amp; rx = a;</span><br><span class="line">    <span class="type">const</span> <span class="type">int</span>&amp; ry = b;</span><br><span class="line">    <span class="type">const</span> <span class="type">int</span>&amp; rz = c;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//普通变量、常变量、字面常量都可以被const引用</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//左值：可以去地址的量，如：&amp;a</span></span><br><span class="line"><span class="comment">//右值：不可以取地址的量，如:100、20</span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">int</span> a = <span class="number">10</span>;	<span class="comment">//&amp;a left value</span></span><br><span class="line">    <span class="type">const</span> <span class="type">int</span> b = <span class="number">20</span>; <span class="comment">//&amp;b left value</span></span><br><span class="line">    <span class="type">int</span>&amp; x = a; <span class="comment">//&amp;x left value</span></span><br><span class="line">    <span class="type">const</span> <span class="type">int</span>&amp; y = b; <span class="comment">//&amp;y left value</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment">//右值引用：</span></span><br><span class="line">    <span class="type">const</span> <span class="type">int</span>&amp; z = <span class="number">10</span>;</span><br><span class="line">    <span class="comment">//这里有一个临时变量</span></span><br><span class="line">    <span class="comment">//int tmp = 10;</span></span><br><span class="line">    <span class="comment">//const int &amp;z = tmp;</span></span><br><span class="line">    <span class="comment">//z += 10;</span></span><br><span class="line">    </span><br><span class="line">    <span class="type">int</span>&amp;&amp; r = <span class="number">10</span>;		</span><br><span class="line">    <span class="comment">//int tmp = 10;</span></span><br><span class="line">    <span class="comment">//int&amp; r = tmp;</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment">//int&amp;&amp; ra = a;  //err! 右值引用只能引用字面常量</span></span><br><span class="line">   </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>引用<strong>可以</strong>引用变量、数组、指针。</p>
+<p><strong>不可以</strong>对函数中局部变量以指针或引用方式返回。</p>
+<p>从汇编层次理解引用：</p>
+<p><img src="/picture/cpp-first/1709046507417.png"></p>
+<p><img src="/picture/cpp-first/1709046550295.png" alt="指针汇编"></p>
+<p><img src="/picture/cpp-first/1709046577230.png" alt="引用汇编"></p>
+<p>可以看到对于编译器而言其实是把引用当作指针看待，先将其地址赋给rax寄存器，然后再把rax寄存器的值赋给我们的变量。</p>
+<p>效率问题：</p>
+<ul>
+<li>对于内置变量(int、double、char)值传递更为方便</li>
+<li>但是对于结构体类型而言，值传递可能需要更多内存，而引用不必为其开辟内存。</li>
+</ul>
+<h3 id="6-inline"><a href="#6-inline" class="headerlink" title="6.inline"></a>6.inline</h3><p>当程序调用函数时，需要为其在栈上开辟空间、保护现场、参数传递控制程序的执行等，这些都需要消耗系统空间和事件。</p>
+<p>内置函数是以空间换时间的做法，适用于简单的函数。（如果是递归、或者代码过长则不适用内置函数）</p>
+<p>inline对于编译器只是建议、编译器会自动优化。</p>
+<p>inline不建议声明与定义分离，如果分离的话会导致连接错误。(函数被展开后，就无法获取函数地址)</p>
+<p>内联函数与宏定义的区别：</p>
+<ul>
+<li>内联函数在编译展开，带参的宏定义在预编译展开。</li>
+<li>内联函数直接嵌入到目标代码中，宏只是简单的替换。</li>
+<li>内联函数有类型检测，语义判断等。</li>
+</ul>
+<h3 id="6-缺省函数"><a href="#6-缺省函数" class="headerlink" title="6.缺省函数"></a>6.缺省函数</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">fun</span><span class="params">(<span class="type">int</span> a, <span class="type">int</span> b, <span class="type">int</span> c = <span class="number">20</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//void fun(int , int , int = 20 )		//这样也可以</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>如果想要参数缺省，应该<strong>从右向左</strong>依次设值。</p>
+<p>缺省的参数可以是任意表达式。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">my_rand</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">srand</span>(<span class="built_in">time</span>(<span class="literal">NULL</span>));</span><br><span class="line">    <span class="type">int</span> ra = <span class="built_in">rand</span>()%<span class="number">100</span>;</span><br><span class="line">    <span class="keyword">return</span> ra;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">fun</span><span class="params">(<span class="type">int</span> a, <span class="type">int</span> b = my_rand())</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    cout &lt;&lt; a &lt;&lt; b &lt;&lt; endl;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">fun</span>(<span class="number">100</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>当缺省的参数是表达式时，只在该表达式被调用时求值。</p>
+<h3 id="7-函数重载"><a href="#7-函数重载" class="headerlink" title="7.函数重载"></a>7.函数重载</h3><p>多个函数只要满足<strong>参数个数</strong>或<strong>参数类型</strong>不同即可重载。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">max</span><span class="params">(<span class="type">int</span> a, <span class="type">int</span> b)</span></span>;</span><br><span class="line"><span class="function"><span class="type">float</span> <span class="title">max</span><span class="params">(<span class="type">float</span> a, <span class="type">float</span> b)</span></span>;</span><br><span class="line"><span class="function"><span class="type">float</span> <span class="title">max</span><span class="params">(<span class="type">float</span> a, <span class="type">float</span> b, <span class="type">float</span> c)</span></span>;</span><br></pre></td></tr></table></figure>
+
+<p>注意的点：</p>
+<ul>
+<li>使用typedef重新命名一个类型，它只是一个<strong>替换名</strong>并<strong>不是新类型</strong>因此编译器还会将其视为两个相同的函数。</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="type">unsigned</span> <span class="type">int</span> u_int;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">max</span><span class="params">(<span class="type">int</span> a, <span class="type">int</span> b)</span></span>;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">max</span><span class="params">(u_int x, u_int y)</span></span>;</span><br><span class="line"><span class="comment">//二者无法重载</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>如果是加了const关键字或者引用编译器会区分其类型。</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">fun</span><span class="params">(<span class="type">int</span>* p)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">fun</span><span class="params">(<span class="type">const</span> <span class="type">int</span>* p)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">fun</span><span class="params">(<span class="type">int</span>&amp; p)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">fun</span><span class="params">(<span class="type">const</span> <span class="type">int</span>&amp; p)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="type">int</span> a = <span class="number">10</span>;</span><br><span class="line">	<span class="type">const</span> <span class="type">int</span> b = <span class="number">20</span>;</span><br><span class="line">	<span class="built_in">fun</span>(a);	<span class="comment">//fun(int&amp; p)</span></span><br><span class="line">	<span class="built_in">fun</span>(b); <span class="comment">//fun(const int&amp; p)</span></span><br><span class="line">    <span class="built_in">fun</span>(&amp;a); <span class="comment">//fun(int* p)</span></span><br><span class="line">    <span class="built_in">fun</span>(&amp;b); <span class="comment">//fun(const int* p)</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>函数调用二义性</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">fun</span><span class="params">(<span class="type">int</span> a)</span></span>;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">fun</span><span class="params">(<span class="type">int</span> a, <span class="type">int</span> b)</span></span>;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">fun</span><span class="params">(<span class="type">int</span> a, <span class="type">int</span> b = <span class="number">10</span>)</span></span>;</span><br></pre></td></tr></table></figure>
+
+<p>避免既有函数重载，又包含了缺省函数</p>
+<h3 id="8-模板"><a href="#8-模板" class="headerlink" title="8.模板"></a>8.模板</h3><p>模板是产生代码的代码，在编译时进行模板实参推演。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span>&lt;模板参数表&gt;</span><br><span class="line">返回类型 函数名(形式参数表)</span><br><span class="line">&#123;</span><br><span class="line">  <span class="comment">//函数体</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">template</span>&lt;<span class="keyword">class</span> T&gt;</span></span><br><span class="line"><span class="function">T <span class="title">my_max</span><span class="params">(T a, T b)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> a&gt;b ? a:b;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">my_max</span>(<span class="number">1</span>,<span class="number">2</span>);</span><br><span class="line">    <span class="built_in">my_max</span>(<span class="string">&#x27;a&#x27;</span>,<span class="string">&#x27;b&#x27;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>返回的类型会根据模板的设计以及传入的参数推导出。</p>
+<p><img src="/picture/cpp-first/1709548303449.png" alt="模板实参推演"></p>
+<h3 id="9-名字空间-namespace"><a href="#9-名字空间-namespace" class="headerlink" title="9.名字空间:namespace"></a>9.名字空间:namespace</h3><p>为了解决全局名字污染问题，防止程序中全局实体名与其他程序的全局实体名命名冲突。</p>
+<h3 id="10-c-内存管理"><a href="#10-c-内存管理" class="headerlink" title="10.c++内存管理"></a>10.c++内存管理</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="type">int</span> n = <span class="number">10</span>;</span><br><span class="line">	<span class="type">int</span>* p1 = <span class="keyword">new</span> <span class="built_in">int</span>(<span class="number">10</span>);	<span class="comment">//单个变量</span></span><br><span class="line">	<span class="type">int</span>* p2 = <span class="keyword">new</span> <span class="type">int</span>[n] &#123;<span class="number">5</span>&#125;; <span class="comment">//初始化数组第一个元素</span></span><br><span class="line">	<span class="type">int</span>* p3 = <span class="keyword">new</span> <span class="type">int</span>[n] &#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>, <span class="number">10</span>&#125;;</span><br><span class="line">	<span class="comment">//初始化整个数组</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/picture/cpp-first/1709548947002.png" alt="p2"></p>
+<p>new和malloc可以混用。区别:</p>
+<ol>
+<li>malloc\free是函数，new\delete是关键字。</li>
+<li>malloc需要手动计算大小，new只需要类型名自动计算大小。</li>
+<li>malloc申请空间不会初始化，new会<strong>初始化</strong>。</li>
+<li>malloc返回类型是void*需要强转，new直接根据给出的类型自动得出。</li>
+<li>malloc返回失败需要不会提醒，需要判断是否为空(NULL)，new申请空间失败会抛出异常，要有捕获程序。</li>
+</ol>
+<h3 id="11-c11新特性"><a href="#11-c11新特性" class="headerlink" title="11.c11新特性"></a>11.c11新特性</h3><h4 id="1-类型推导"><a href="#1-类型推导" class="headerlink" title="1.类型推导"></a>1.类型推导</h4><p>​	C++11引入了<strong>auto</strong>和<strong>decltype</strong>关键字实现类型推导，通过这两个关键字可以简单快速获取复杂的类型。</p>
+<p>C11中auto成为类型指示符(type-specifier)。</p>
+<p>auto类型推导:auto定义的变量，可以根据<strong>初始化的值</strong>，在编译时推导出变量名的类型。</p>
+<p>auto只是一个<strong>占位符</strong>，编译器会在初始化时推导出其类型，从而从而将这个位置替换成真正的类型。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">auto</span> x = <span class="number">10</span>; 	<span class="comment">//10 -&gt; x = int</span></span><br><span class="line">    <span class="keyword">auto</span> dx = <span class="number">12.23</span>;	<span class="comment">//双精度double</span></span><br><span class="line">    <span class="keyword">auto</span> fd = <span class="number">12.23f</span>;	<span class="comment">//单精度float</span></span><br><span class="line">    <span class="keyword">auto</span> ch = <span class="string">&#x27;a&#x27;</span>;	<span class="comment">//字符型char</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">const</span> <span class="type">int</span> a = <span class="number">10</span>;</span><br><span class="line">    <span class="keyword">auto</span> b = a;	<span class="comment">//b int; auto int</span></span><br><span class="line">    <span class="keyword">auto</span>&amp; c = a; <span class="comment">//c const int&amp;; auto const int	</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">const</span> <span class="type">int</span> a = <span class="number">10</span>;</span><br><span class="line">    <span class="keyword">auto</span>* p = &amp;a;	<span class="comment">//p = const int *; auto const int;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>auto的类型会包含const:</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">auto</span> m = <span class="number">5</span>;				<span class="comment">//m int;</span></span><br><span class="line">    <span class="type">const</span> <span class="keyword">auto</span>* mp = &amp;m ,u = <span class="number">6</span>;	 <span class="comment">//mp const int*; auto const int</span></span><br><span class="line">								<span class="comment">//u const int</span></span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<img src="/picture/cpp-first/1709550623895.png" style="zoom: 200%;" />
+
+<p>表达式包含const,auto会把const丢弃:</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> x;</span><br><span class="line"><span class="type">const</span> <span class="keyword">auto</span> e = x; <span class="comment">// ok e -&gt; const int;</span></span><br><span class="line"><span class="keyword">auto</span> f = e; <span class="comment">// ok f -&gt; int;</span></span><br></pre></td></tr></table></figure>
+
+<p>引用会被包含在auto推导的类型中:</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">const</span> <span class="keyword">auto</span> &amp;g = x; <span class="comment">// ok g -&gt; const int &amp;</span></span><br><span class="line"><span class="keyword">auto</span> &amp; h = g; <span class="comment">// ok h -&gt; const int &amp;</span></span><br></pre></td></tr></table></figure>
+
+<p>当<strong>不声明</strong>为指针或引用时，auto的推导值和表达式抛弃cv限定符一致。</p>
+<p>当<strong>声明</strong>为指针或引用时，auto的推导值和表达式一致。</p>
+<h4 id="2-decltype"><a href="#2-decltype" class="headerlink" title="2.decltype"></a>2.decltype</h4><blockquote>
+<p>语法格式:<br>decltype(exp);</p>
+<p>exp是一个表达式。</p>
+</blockquote>
+<p>auto和decltype区别：</p>
+<p>auto必须初始化变量，通过初始化的值推导出auto的类型。decltype不需要。</p>
+<p>decltype在编译时推导出表达式的类型，和sizeof实现相似(通过字节数)</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">int</span> x = <span class="number">10</span>;</span><br><span class="line">    <span class="keyword">decltype</span>(x) y = <span class="number">1</span>; <span class="comment">//y =&gt; int</span></span><br><span class="line">    <span class="keyword">decltype</span>(x+y) z = <span class="number">0</span>; <span class="comment">//z =&gt;int</span></span><br><span class="line">    cosnt <span class="type">int</span> &amp;i = x;</span><br><span class="line">    <span class="keyword">decltype</span>(i) j = y; <span class="comment">//j = const int &amp;</span></span><br><span class="line">    <span class="function"><span class="type">const</span> <span class="title">decltype</span><span class="params">(z)</span>* p </span>= &amp;z; <span class="comment">//*p =&gt; const int, p =&gt; const int* </span></span><br><span class="line">	<span class="keyword">decltype</span>(z) *ip = &amp;z; <span class="comment">//ip =&gt; int*</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>和const怎么使用:</p>
+<h4 id="3-基于范围for循环"><a href="#3-基于范围for循环" class="headerlink" title="3.基于范围for循环"></a>3.基于范围for循环</h4><p>注意:</p>
+<p>​	**:**之后一定是数组。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="type">int</span> ar[] = &#123; <span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>,<span class="number">7</span>,<span class="number">8</span>,<span class="number">9</span>,<span class="number">10</span> &#125;;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">auto</span> x : ar)</span><br><span class="line">	&#123;</span><br><span class="line">		cout&lt;&lt;x&lt;&lt;<span class="string">&quot; &quot;</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	cout&lt;&lt;end;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">auto</span> &amp;x : ar)	<span class="comment">//如果改为for(auto x: ar)则为值传递，不能改变</span></span><br><span class="line">	&#123;				   <span class="comment">//数组里的值</span></span><br><span class="line">		x+=<span class="number">10</span>;</span><br><span class="line">		cout&lt;&lt;x&lt;&lt;<span class="string">&quot; &quot;</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="4-指针空值"><a href="#4-指针空值" class="headerlink" title="4.指针空值"></a>4.指针空值</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">fun</span><span class="params">(<span class="type">char</span>*)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	cout &lt;&lt; <span class="string">&quot;void*&quot;</span> &lt;&lt; endl;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">fun</span><span class="params">(<span class="type">int</span> i)</span></span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	cout &lt;&lt; <span class="string">&quot;int i&quot;</span> &lt;&lt; endl;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">fun</span>(<span class="literal">NULL</span>);<span class="comment">//期望进入fun(cahr*)</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/picture/cpp-first/1709552548879.png" alt="运行结果"></p>
+<p>在c++98中0既可以是整数，也可以是vodi*，容易造成<strong>二义性</strong>。</p>
+<p>nullptr是空指针类型，与之前的0区分开。</p>
+<p>sizeof(nullptr)和sizeof((void*)0)得到的结果都是4字节或8字节。</p>
+<h4 id="5-typedef和using"><a href="#5-typedef和using" class="headerlink" title="5.typedef和using"></a>5.typedef和using</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="type">unsigned</span> <span class="type">int</span> uint;</span><br><span class="line"><span class="keyword">using</span> uint = usigned <span class="type">int</span>;</span><br><span class="line">    </span><br></pre></td></tr></table></figure>
+
+
+                
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/about" rel="external nofollow noreferrer">Even</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="https://restlessxxx.github.io/2024/02/27/cpp-first/">https://restlessxxx.github.io/2024/02/27/cpp-first/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="/about" target="_blank">Even</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/c/">
+                                    <span class="chip bg-color">c++</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/2024/03/07/leetcode/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/13.jpg" class="responsive-img" alt="leetcode">
+                        
+                        <span class="card-title">leetcode</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2024-03-07
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-user fa-fw"></i>
+                            Even
+                            
+                        </span>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2024/02/21/mysql/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/2.jpg" class="responsive-img" alt="mysql">
+                        
+                        <span class="card-title">mysql</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2024-02-21
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-user fa-fw"></i>
+                            Even
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/mysql/">
+                        <span class="chip bg-color">mysql</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget card" style="background-color: white;">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+
+
+    <footer class="page-footer bg-color">
+    
+        <link rel="stylesheet" href="/libs/aplayer/APlayer.min.css">
+<style>
+    .aplayer .aplayer-lrc p {
+        
+        display: none;
+        
+        font-size: 12px;
+        font-weight: 700;
+        line-height: 16px !important;
+    }
+
+    .aplayer .aplayer-lrc p.aplayer-lrc-current {
+        
+        display: none;
+        
+        font-size: 15px;
+        color: #42b983;
+    }
+
+    
+    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body {
+        left: -66px !important;
+    }
+
+    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body:hover {
+        left: 0px !important;
+    }
+
+    
+</style>
+<div class="">
+    
+    <div class="row">
+        <meting-js class="col l8 offset-l2 m10 offset-m1 s12"
+                   server="netease"
+                   type="playlist"
+                   id="503838841"
+                   fixed='true'
+                   autoplay='false'
+                   theme='#42b983'
+                   loop='all'
+                   order='random'
+                   preload='auto'
+                   volume='0.7'
+                   list-folded='true'
+        >
+        </meting-js>
+    </div>
+</div>
+
+<script src="/libs/aplayer/APlayer.min.js"></script>
+<script src="/libs/aplayer/Meting.min.js"></script>
+
+    
+
+    <div class="container row center-align"
+         style="margin-bottom: 0px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            
+                <span id="year">2019-2024</span>
+            
+            <a href="/about" target="_blank">Even</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            
+            <br>
+            
+            
+            
+                
+            
+            
+                <span id="busuanzi_container_site_pv">
+                &nbsp;|&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;
+                    <span id="busuanzi_value_site_pv" class="white-color"></span>
+            </span>
+            
+            
+                <span id="busuanzi_container_site_uv">
+                &nbsp;|&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;
+                    <span id="busuanzi_value_site_uv" class="white-color"></span>
+            </span>
+            
+            <br>
+
+            <!-- 运行天数提醒. -->
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+    <a href="https://github.com/restlessxxx" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:2447232923@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=2447232923" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 2447232923" data-position="top" data-delay="50">
+        <i class="fab fa-qq"></i>
+    </a>
+
+
+
+
+
+
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script type="text/javascript">
+$(function () {
+    var searchFunc = function (path, search_id, content_id) {
+        'use strict';
+        $.ajax({
+            url: path,
+            dataType: "xml",
+            success: function (xmlResponse) {
+                // get the contents from search data
+                var datas = $("entry", xmlResponse).map(function () {
+                    return {
+                        title: $("title", this).text(),
+                        content: $("content", this).text(),
+                        url: $("url", this).text()
+                    };
+                }).get();
+                var $input = document.getElementById(search_id);
+                var $resultContent = document.getElementById(content_id);
+                $input.addEventListener('input', function () {
+                    var str = '<ul class=\"search-result-list\">';
+                    var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                    $resultContent.innerHTML = "";
+                    if (this.value.trim().length <= 0) {
+                        return;
+                    }
+                    // perform local searching
+                    datas.forEach(function (data) {
+                        var isMatch = true;
+                        var data_title = data.title.trim().toLowerCase();
+                        var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+                        var data_url = data.url;
+                        data_url = data_url.indexOf('/') === 0 ? data.url : '/' + data_url;
+                        var index_title = -1;
+                        var index_content = -1;
+                        var first_occur = -1;
+                        // only match artiles with not empty titles and contents
+                        if (data_title !== '' && data_content !== '') {
+                            keywords.forEach(function (keyword, i) {
+                                index_title = data_title.indexOf(keyword);
+                                index_content = data_content.indexOf(keyword);
+                                if (index_title < 0 && index_content < 0) {
+                                    isMatch = false;
+                                } else {
+                                    if (index_content < 0) {
+                                        index_content = 0;
+                                    }
+                                    if (i === 0) {
+                                        first_occur = index_content;
+                                    }
+                                }
+                            });
+                        }
+                        // show search results
+                        if (isMatch) {
+                            str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                            var content = data.content.trim().replace(/<[^>]+>/g, "");
+                            if (first_occur >= 0) {
+                                // cut out 100 characters
+                                var start = first_occur - 20;
+                                var end = first_occur + 80;
+                                if (start < 0) {
+                                    start = 0;
+                                }
+                                if (start === 0) {
+                                    end = 100;
+                                }
+                                if (end > content.length) {
+                                    end = content.length;
+                                }
+                                var match_content = content.substr(start, end);
+                                // highlight all keywords
+                                keywords.forEach(function (keyword) {
+                                    var regS = new RegExp(keyword, "gi");
+                                    match_content = match_content.replace(regS, "<em class=\"search-keyword\">" + keyword + "</em>");
+                                });
+
+                                str += "<p class=\"search-result\">" + match_content + "...</p>"
+                            }
+                            str += "</li>";
+                        }
+                    });
+                    str += "</ul>";
+                    $resultContent.innerHTML = str;
+                });
+            }
+        });
+    };
+
+    searchFunc('/search.xml', 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 白天和黑夜主题 -->
+<div class="stars-con">
+    <div id="stars"></div>
+    <div id="stars2"></div>
+    <div id="stars3"></div>  
+</div>
+
+<script>
+    function switchNightMode() {
+        $('<div class="Cuteen_DarkSky"><div class="Cuteen_DarkPlanet"></div></div>').appendTo($('body')),
+        setTimeout(function () {
+            $('body').hasClass('DarkMode') 
+            ? ($('body').removeClass('DarkMode'), localStorage.setItem('isDark', '0'), $('#sum-moon-icon').removeClass("fa-sun").addClass('fa-moon')) 
+            : ($('body').addClass('DarkMode'), localStorage.setItem('isDark', '1'), $('#sum-moon-icon').addClass("fa-sun").removeClass('fa-moon')),
+            
+            setTimeout(function () {
+            $('.Cuteen_DarkSky').fadeOut(1e3, function () {
+                $(this).remove()
+            })
+            }, 2e3)
+        })
+    }
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    
+
+    
+    
+    
+
+    <!-- 雪花特效 -->
+    
+
+    <!-- 鼠标星星特效 -->
+    
+
+     
+        <script src="https://ssl.captcha.qq.com/TCaptcha.js"></script>
+        <script src="/libs/others/TencentCaptcha.js"></script>
+        <button id="TencentCaptcha" data-appid="xxxxxxxxxx" data-cbfn="callback" type="button" hidden></button>
+    
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    <script src="/libs/others/clicklove.js" async="async"></script>
+    
+    
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+
+    <!--腾讯兔小巢-->
+    
+    
+
+    
+
+    
+
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+</body>
+
+</html>
