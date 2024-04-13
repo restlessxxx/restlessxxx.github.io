@@ -6,17 +6,17 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://restlessxxx.github.io">
-  <title>内存管理 | EVEN&#39;s new bolg</title>
+  <title>const | EVEN&#39;s new bolg</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="动态内存开辟c语言中是调用malloc()、calloc()、realloc()函数动态开辟内存，free函数释放内存。 c++中给出了new关键字开辟内存，以及delete关键字释放内存。 用法：1234567891011&#x2F;&#x2F;开辟一个整型变量大小的内存&#x2F;&#x2F;cint* p &#x3D; (int*)malloc(sizeof(int));if(p &#x3D;&#x3D; nullptr)&#123;  return -1;&amp;">
+  <meta name="description" content="const和一级指针const修饰的量叫常量。 1.常量与普通变量的区别？ 编译方式不同，c++中会把常量做同名替换 常量不能作为左值  2.const修饰的量常出现的错误 作为左值 通过指针间接修改常量的值  为了避免出现第二种错误，出现了const与指针搭配使用的方法： 123const int* p;  &#x2F;&#x2F;const修饰指向,不可以改变指针所指向的地址的值int* const p;  &#x2F;&#x2F;">
 <meta property="og:type" content="article">
-<meta property="og:title" content="内存管理">
-<meta property="og:url" content="https://restlessxxx.github.io/2024/04/09/c++%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/index.html">
+<meta property="og:title" content="const">
+<meta property="og:url" content="https://restlessxxx.github.io/2024/04/10/c-const/index.html">
 <meta property="og:site_name" content="EVEN&#39;s new bolg">
-<meta property="og:description" content="动态内存开辟c语言中是调用malloc()、calloc()、realloc()函数动态开辟内存，free函数释放内存。 c++中给出了new关键字开辟内存，以及delete关键字释放内存。 用法：1234567891011&#x2F;&#x2F;开辟一个整型变量大小的内存&#x2F;&#x2F;cint* p &#x3D; (int*)malloc(sizeof(int));if(p &#x3D;&#x3D; nullptr)&#123;  return -1;&amp;">
+<meta property="og:description" content="const和一级指针const修饰的量叫常量。 1.常量与普通变量的区别？ 编译方式不同，c++中会把常量做同名替换 常量不能作为左值  2.const修饰的量常出现的错误 作为左值 通过指针间接修改常量的值  为了避免出现第二种错误，出现了const与指针搭配使用的方法： 123const int* p;  &#x2F;&#x2F;const修饰指向,不可以改变指针所指向的地址的值int* const p;  &#x2F;&#x2F;">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2024-04-09T13:17:01.000Z">
-<meta property="article:modified_time" content="2024-04-10T05:27:21.150Z">
+<meta property="article:published_time" content="2024-04-10T08:57:07.000Z">
+<meta property="article:modified_time" content="2024-04-11T10:45:55.866Z">
 <meta property="article:author" content="Even">
 <meta property="article:tag" content="c++">
 <meta name="twitter:card" content="summary">
@@ -155,56 +155,48 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-c++内存管理" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-c-const" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      内存管理
+      const
     </h1>
   
 
         
-        <a href="/2024/04/09/c++%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/" class="archive-article-date">
-  	<time datetime="2024-04-09T13:17:01.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-04-09</time>
+        <a href="/2024/04/10/c-const/" class="archive-article-date">
+  	<time datetime="2024-04-10T08:57:07.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-04-10</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="动态内存开辟"><a href="#动态内存开辟" class="headerlink" title="动态内存开辟"></a>动态内存开辟</h3><p>c语言中是调用malloc()、calloc()、realloc()函数动态开辟内存，free函数释放内存。</p>
-<p>c++中给出了new关键字开辟内存，以及delete关键字释放内存。</p>
-<h3 id="用法："><a href="#用法：" class="headerlink" title="用法："></a>用法：</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//开辟一个整型变量大小的内存</span></span><br><span class="line"><span class="comment">//c</span></span><br><span class="line"><span class="type">int</span>* p = (<span class="type">int</span>*)<span class="built_in">malloc</span>(<span class="built_in">sizeof</span>(<span class="type">int</span>));</span><br><span class="line"><span class="keyword">if</span>(p == <span class="literal">nullptr</span>)</span><br><span class="line">&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">free</span>(p);</span><br><span class="line"><span class="comment">//c++</span></span><br><span class="line"><span class="type">int</span>* q = <span class="keyword">new</span> <span class="type">int</span>; <span class="comment">//此时未初始化 int* q = new int&#123;&#125;;初始化为0</span></span><br><span class="line"><span class="built_in">delete</span>(q);</span><br></pre></td></tr></table></figure>
+        <h3 id="const和一级指针"><a href="#const和一级指针" class="headerlink" title="const和一级指针"></a>const和一级指针</h3><p>const修饰的量叫<em><strong>常量</strong></em>。</p>
+<h4 id="1-常量与普通变量的区别？"><a href="#1-常量与普通变量的区别？" class="headerlink" title="1.常量与普通变量的区别？"></a>1.常量与普通变量的区别？</h4><ul>
+<li>编译方式不同，c++中会把常量做同名替换</li>
+<li>常量不能作为左值</li>
+</ul>
+<h4 id="2-const修饰的量常出现的错误"><a href="#2-const修饰的量常出现的错误" class="headerlink" title="2.const修饰的量常出现的错误"></a>2.const修饰的量常出现的错误</h4><ul>
+<li>作为左值</li>
+<li>通过指针间接修改常量的值</li>
+</ul>
+<p>为了避免出现第二种错误，出现了const与指针搭配使用的方法：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">const</span> <span class="type">int</span>* p;  <span class="comment">//const修饰指向,不可以改变指针所指向的地址的值</span></span><br><span class="line"><span class="type">int</span>* <span class="type">const</span> p;  <span class="comment">//const修饰指针，不可以改变指针的值</span></span><br><span class="line"><span class="type">const</span> <span class="type">int</span>* <span class="type">const</span> p;    </span><br></pre></td></tr></table></figure>
 
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//开辟一个整型大小为20的内存</span></span><br><span class="line"><span class="comment">//c</span></span><br><span class="line"><span class="type">int</span>* arr1 = (<span class="type">int</span>*)<span class="built_in">malloc</span>(<span class="built_in">sizeof</span>(<span class="type">int</span>) * <span class="number">20</span>);</span><br><span class="line"><span class="keyword">if</span>(arr1 == <span class="literal">nullptr</span>)</span><br><span class="line">&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">free</span>(arr1);</span><br><span class="line"><span class="comment">//c++</span></span><br><span class="line"><span class="type">int</span>* arr2 = <span class="keyword">new</span> <span class="type">int</span>[<span class="number">20</span>];<span class="comment">//此时未初始化 int* arr = new int[20]&#123;&#125;;全0</span></span><br><span class="line"><span class="keyword">delete</span>[] arr2;</span><br></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">const</span> <span class="type">int</span> a = <span class="number">10</span>;</span><br><span class="line"><span class="type">const</span> <span class="type">int</span>* p1 = &amp;a;<span class="comment">//ok  const int*  &lt;=  const int*</span></span><br><span class="line"><span class="type">int</span>* <span class="type">const</span> p2 = &amp;a;<span class="comment">//err  int*  &lt;=  const int*</span></span><br><span class="line"><span class="type">const</span> <span class="type">int</span>* <span class="type">const</span> p3 = &amp;a;<span class="comment">//ok</span></span><br></pre></td></tr></table></figure>
 
-<h3 id="注意："><a href="#注意：" class="headerlink" title="注意："></a><strong>注意</strong>：</h3><h4 id="1-初始化问题"><a href="#1-初始化问题" class="headerlink" title="1.初始化问题"></a>1.初始化问题</h4><p>想要申请内存同时初始化这片内存值为0，c中调用calloc()函数，c++中直接使用初始化列表即可。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//c</span></span><br><span class="line"><span class="type">int</span>* arr1 = (<span class="type">int</span>*)<span class="built_in">calloc</span>(<span class="number">20</span>, <span class="built_in">sizeof</span>(<span class="type">int</span>));</span><br><span class="line"><span class="keyword">if</span> (arr1 == <span class="literal">NULL</span>) <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line"><span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; <span class="number">20</span>; i++)</span><br><span class="line">&#123;</span><br><span class="line">  cout &lt;&lt; arr1[i] &lt;&lt; <span class="string">&quot; &quot;</span>;<span class="comment">// 000000000...</span></span><br><span class="line">&#125;</span><br><span class="line">cout &lt;&lt; endl;</span><br><span class="line"><span class="comment">//c++</span></span><br><span class="line"><span class="type">int</span>* arr2 = <span class="keyword">new</span> <span class="type">int</span>[<span class="number">20</span>] &#123;&#125;;</span><br><span class="line"><span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; <span class="number">20</span>; i++)</span><br><span class="line">&#123;</span><br><span class="line">  cout &lt;&lt; arr2[i] &lt;&lt; <span class="string">&quot; &quot;</span>;<span class="comment">// 00000000...</span></span><br><span class="line">&#125;</span><br><span class="line">cout &lt;&lt; endl;</span><br></pre></td></tr></table></figure>
+<h4 id="3-const指针赋值兼容问题"><a href="#3-const指针赋值兼容问题" class="headerlink" title="3.const指针赋值兼容问题"></a>3.const指针赋值兼容问题</h4><p>兼容赋值公式：const int*  &lt;&#x3D;  int*	<em><strong>能力强的指针可以赋值给能力弱的指针</strong></em></p>
+<p>如何判断const是否参与类型？<br>const右边是否有 *</p>
+<p>eg1:</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> val = <span class="number">20</span>;</span><br><span class="line"><span class="type">const</span> <span class="type">int</span>* s = &amp;val;</span><br><span class="line">    </span><br><span class="line"><span class="type">int</span>* p1 = s;<span class="comment">//err  int*  &lt;=  const int*</span></span><br><span class="line"><span class="type">const</span> <span class="type">int</span>* p2 = s;<span class="comment">//ok  const int*  &lt;=  const int*</span></span><br><span class="line"><span class="type">int</span>* <span class="type">const</span> p3 = s;<span class="comment">//err  int*  &lt;=  const int*</span></span><br><span class="line"><span class="type">const</span> <span class="type">int</span>* <span class="type">const</span> p4 = s;<span class="comment">//ok</span></span><br></pre></td></tr></table></figure>
 
-<h4 id="2-开辟内存失败怎么办？"><a href="#2-开辟内存失败怎么办？" class="headerlink" title="2.开辟内存失败怎么办？"></a>2.开辟内存失败怎么办？</h4><p>malloc内存开辟失败是通过返回值与NULL比较；new内存开辟失败会抛出异常。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//new的异常捕获</span></span><br><span class="line"><span class="keyword">try</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="type">int</span>* p = <span class="keyword">new</span> <span class="type">int</span>[<span class="number">10</span>];</span><br><span class="line">  <span class="comment">//后续正常处理</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">catch</span>(std::bad_alloc)</span><br><span class="line">&#123;</span><br><span class="line">  <span class="comment">//异常处理</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>eg2:</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> val = <span class="number">20</span>;</span><br><span class="line"><span class="type">int</span>* <span class="type">const</span> s = &amp;val;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span>* p1 = s;<span class="comment">//ok  int*  &lt;=  int*</span></span><br><span class="line"><span class="type">const</span> <span class="type">int</span>* p2 = s;<span class="comment">//ok  const int*  &lt;=  int*</span></span><br><span class="line"><span class="type">int</span>* <span class="type">const</span> p3 = s;<span class="comment">//ok  int*  &lt;=  int*</span></span><br><span class="line"><span class="type">const</span> <span class="type">int</span>* <span class="type">const</span> p4 = s;<span class="comment">//ok</span></span><br></pre></td></tr></table></figure>
 
-<h4 id="3-定位new"><a href="#3-定位new" class="headerlink" title="3.定位new"></a>3.定位new</h4><p>为程序员提供了一种通过内存位置修改其值的方式。</p>
-<p>定位new运算符不需要相应的delete运算符来释放内存，因为它本身就<em>不开辟新的内存</em>。 </p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//正确用法</span></span><br><span class="line"><span class="type">int</span> data = <span class="number">90</span>;</span><br><span class="line"><span class="type">int</span>* p1 = <span class="built_in">new</span> (&amp;data) <span class="built_in">int</span>(<span class="number">20</span>);<span class="comment">//ok</span></span><br><span class="line"><span class="comment">//错误用法</span></span><br><span class="line"><span class="type">int</span>* p2 = <span class="built_in">new</span> (&amp;data) <span class="type">int</span>[<span class="number">5</span>]&#123;&#125;;</span><br><span class="line">p2[<span class="number">3</span>] = <span class="number">10</span>;<span class="comment">//编译通过，执行出错！p2所指的只能有一个int大小</span></span><br></pre></td></tr></table></figure>
-
-<h4 id="4-new有多少种用法"><a href="#4-new有多少种用法" class="headerlink" title="4.new有多少种用法?"></a>4.new有多少种用法?</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//1.普通用法</span></span><br><span class="line"><span class="type">int</span>* p1 = <span class="keyword">new</span> <span class="built_in">int</span>(<span class="number">10</span>);</span><br><span class="line"><span class="comment">//2.不抛出异常new</span></span><br><span class="line"><span class="type">int</span>* p2 = <span class="built_in">new</span>(nothrow) <span class="type">int</span>;</span><br><span class="line"><span class="comment">//3.定义常量</span></span><br><span class="line"><span class="type">const</span> <span class="type">int</span>* p3 = <span class="keyword">new</span> <span class="type">const</span> <span class="type">int</span>;</span><br><span class="line"><span class="comment">//4.定位new</span></span><br><span class="line"><span class="type">int</span> data = <span class="number">0</span>;</span><br><span class="line"><span class="type">int</span>* p4 = <span class="built_in">new</span> (&amp;data) <span class="built_in">int</span>(<span class="number">50</span>);</span><br></pre></td></tr></table></figure>
-
-<h3 id="new-malloc区别："><a href="#new-malloc区别：" class="headerlink" title="new&#x2F;malloc区别："></a>new&#x2F;malloc区别：</h3><ol>
-<li>new是关键字，malloc()是函数。</li>
-<li>new无返回值，malloc()需要指定其返回类型。</li>
-<li>new通过异常捕获程序判断其是否内存开辟失败，malloc()通过返回值判断。</li>
-<li>new通过初始化列表直接初始化，calloc()可以初始化为0。</li>
-<li>new通过类型名自动计算大小，malloc()需要手动计算。</li>
-</ol>
-<h3 id="delete-free区别："><a href="#delete-free区别：" class="headerlink" title="delete&#x2F;free区别："></a>delete&#x2F;free区别：</h3><ol>
-<li>delete是关键字，free()是函数。</li>
-<li>delete处理数组要加[]，free()只需要传入首地址指针。</li>
-<li>delete会调用对象析构函数，free()不会！</li>
-</ol>
 
       
 
@@ -295,7 +287,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=https://restlessxxx.github.io/2024/04/09/c++%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=https://restlessxxx.github.io/2024/04/10/c-const/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -309,7 +301,7 @@
   
 <nav id="article-nav">
   
-    <a href="/2024/04/10/c-const/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2024/04/10/c++const/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
@@ -319,8 +311,8 @@
     </a>
   
   
-    <a href="/2024/04/09/c++%E5%9C%B0%E5%9D%80%E5%88%92%E5%88%86/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">进程的虚拟地址空间内存划分和布局</div>
+    <a href="/2024/04/09/c++%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">内存管理</div>
       <i class="icon-circle-right"></i>
     </a>
   
