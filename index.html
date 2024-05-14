@@ -154,6 +154,609 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-linux-进程间通信" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2024/05/14/linux-%E8%BF%9B%E7%A8%8B%E9%97%B4%E9%80%9A%E4%BF%A1/">linux-进程间通信</a>
+    </h1>
+  
+
+        
+        <a href="/2024/05/14/linux-%E8%BF%9B%E7%A8%8B%E9%97%B4%E9%80%9A%E4%BF%A1/" class="archive-article-date">
+  	<time datetime="2024-05-14T13:16:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-05-14</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="1-管道"><a href="#1-管道" class="headerlink" title="1.管道"></a>1.管道</h3><h3 id="2-信号量"><a href="#2-信号量" class="headerlink" title="2.信号量"></a>2.信号量</h3><h3 id="3-共享内存"><a href="#3-共享内存" class="headerlink" title="3.共享内存"></a>3.共享内存</h3><h3 id="4-消息队列"><a href="#4-消息队列" class="headerlink" title="4.消息队列"></a>4.消息队列</h3><h3 id="5-套接字"><a href="#5-套接字" class="headerlink" title="5.套接字"></a>5.套接字</h3>
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">linux</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2024/05/14/linux-%E8%BF%9B%E7%A8%8B%E9%97%B4%E9%80%9A%E4%BF%A1/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-linux-库文件" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2024/05/14/linux-%E5%BA%93%E6%96%87%E4%BB%B6/">linux-库文件</a>
+    </h1>
+  
+
+        
+        <a href="/2024/05/14/linux-%E5%BA%93%E6%96%87%E4%BB%B6/" class="archive-article-date">
+  	<time datetime="2024-05-14T11:02:34.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-05-14</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="1-什么是库文件"><a href="#1-什么是库文件" class="headerlink" title="1.什么是库文件"></a>1.什么是库文件</h3><p>库文件就是一组预先编译好的方法集合。分为静态库和共享库。存放在特定位置，方便再编写代码时调用使用。</p>
+<p>可执行程序（命令）：&#x2F;usr&#x2F;bin  &#x2F;bin  &#x2F;usr&#x2F;local&#x2F;bin<br>头文件：&#x2F;usr&#x2F;include<br>库文件：&#x2F;usr&#x2F;lib  lib…</p>
+<p><img src="/../picture/linux-%E5%BA%93%E6%96%87%E4%BB%B6/1715684870811.png" alt="/usr/bin"></p>
+<p><img src="/../picture/linux-%E5%BA%93%E6%96%87%E4%BB%B6/1715685057386.png" alt="/usr/include"></p>
+<h3 id="2-静态库-libxx-a"><a href="#2-静态库-libxx-a" class="headerlink" title="2.静态库 libxx.a"></a>2.静态库 libxx.a</h3><p>创建库：</p>
+<p>第一步，将.c文件编译成.o文件<br><img src="/../picture/linux-%E5%BA%93%E6%96%87%E4%BB%B6/1715685613947.png" alt="编译为.o文件"></p>
+<p>第二步，使用ar命令将第一步编译的所有.o文件生成静态库</p>
+<ul>
+<li>c是创建库</li>
+<li>r是将方法添加到库中</li>
+<li>v显示过程</li>
+</ul>
+<p>ar	cvr	lib库名.a	add.o	max.o（库名前必须加lib）</p>
+<p>使用库：</p>
+<p>gcc	-o	main	main.c	-L路径	-l库名</p>
+<h3 id="3-共享库-libxx-so"><a href="#3-共享库-libxx-so" class="headerlink" title="3.共享库 libxx.so"></a>3.共享库 libxx.so</h3><p>创建库<br>gcc	-shared	-fPIC	-o	libxx.so	xx.o	xx.o（.c也可以）</p>
+<p>编译<br>gcc	-o	main	main.c	-L.路径	-l库名</p>
+<p>一般情况下，系统会自动去标准路径库下查找因此创建的标准库要存放在&#x2F;usr&#x2F;lib下</p>
+<p><img src="/../picture/linux-%E5%BA%93%E6%96%87%E4%BB%B6/1715686282693.png" alt="示例"></p>
+<p><strong>ldd</strong> 查看依赖的库名</p>
+<h3 id="4-静态库与共享库的区别"><a href="#4-静态库与共享库的区别" class="headerlink" title="4.静态库与共享库的区别"></a>4.静态库与共享库的区别</h3><p>静态库：在链接时会将所用到的方法包含到可执行程序中</p>
+<p>共享库：只做标记，只有在运行时才动态加载</p>
+<h3 id="5-共享库的一些思考"><a href="#5-共享库的一些思考" class="headerlink" title="5.共享库的一些思考"></a>5.共享库的一些思考</h3><p>共享库的加载过程：</p>
+<p>1.编译、链接生成可执行程序：会将目标文件与所需的共享库连接在一起，<em><strong>连接器</strong></em>只会将库中函数的引用包含在可执行程序中，<em><strong>不会</strong></em>直接将函数的代码和数据包含进可执行程序。</p>
+<p>2.可执行文件启动：将可执行文件加载进内存中，在调用main()函数之前会调用动态连接器。</p>
+<p>3.动态链接器工作：</p>
+<ul>
+<li>首先检查可执行文件依赖哪些库函数</li>
+<li>然后读取库文件，将其<strong>代码和数据</strong>映射到程序内存的虚拟地址空间中</li>
+<li>解析可执行文件中对共享库的引用，将这些引用替换为在内存中的实际地址。</li>
+</ul>
+<p>4.程序执行。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">linux</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2024/05/14/linux-%E5%BA%93%E6%96%87%E4%BB%B6/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-c-模板" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2024/04/25/c-%E6%A8%A1%E6%9D%BF/">c++模板</a>
+    </h1>
+  
+
+        
+        <a href="/2024/04/25/c-%E6%A8%A1%E6%9D%BF/" class="archive-article-date">
+  	<time datetime="2024-04-25T06:23:44.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-04-25</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="模板"><a href="#模板" class="headerlink" title="模板"></a>模板</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</span></span><br><span class="line"><span class="function"><span class="type">bool</span> <span class="title">compare</span><span class="params">(T a, T b)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  cout &lt;&lt; <span class="string">&quot;compare template&quot;</span> &lt;&lt; endl;</span><br><span class="line">  <span class="keyword">return</span> a &gt; b;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">compare&lt;int&gt;(int a, int b) //存放在.o文件的符号表中</span></span><br><span class="line"><span class="comment">&#123;</span></span><br><span class="line"><span class="comment">  return a&gt; b;</span></span><br><span class="line"><span class="comment">&#125;</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="built_in">compare</span>&lt;<span class="type">int</span>&gt;(<span class="number">10</span>, <span class="number">20</span>);</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>从编译器角度来看，需要根据类型再实例化一份代码，工作量并没有减少。</p>
+<p>但在用户角度，减少了工作量。</p>
+<h3 id="模板实参推演"><a href="#模板实参推演" class="headerlink" title="模板实参推演"></a>模板实参推演</h3><p>可以根据用户传入的实参的类型，推导出模板类型参数的具体类型。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</span></span><br><span class="line"><span class="function"><span class="type">bool</span> <span class="title">compare</span><span class="params">(T a, T b)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  cout &lt;&lt; <span class="string">&quot;compare template&quot;</span> &lt;&lt; endl;</span><br><span class="line">  <span class="keyword">return</span> a &gt; b;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">compare&lt;int&gt;(int a, int b)  //存放在.o文件的符号表中</span></span><br><span class="line"><span class="comment">&#123;</span></span><br><span class="line"><span class="comment">  return a&gt; b;</span></span><br><span class="line"><span class="comment">&#125;</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="built_in">compare</span>(<span class="number">10</span>, <span class="number">20</span>);	<span class="comment">//推导出模板类型为int </span></span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="模板的特例化"><a href="#模板的特例化" class="headerlink" title="模板的特例化"></a>模板的特例化</h3><p>不是编译器提供的，而是用户提供的。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//针对compare函数模板，提供const char*类型的特例化版本</span></span><br><span class="line"><span class="keyword">template</span>&lt;&gt;</span><br><span class="line"><span class="type">bool</span> <span class="built_in">compare</span>&lt;<span class="type">const</span> <span class="type">char</span>*&gt;(<span class="type">const</span> <span class="type">char</span>* a, <span class="type">const</span> <span class="type">char</span>* b)</span><br><span class="line">&#123;</span><br><span class="line">  cout &lt;&lt; <span class="string">&quot;compare&lt;const char*&gt;&quot;</span> &lt;&lt; endl;</span><br><span class="line">  <span class="keyword">return</span> <span class="built_in">strcmp</span>(a, b) &gt; <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">    compare&lt;char*&gt;(&quot;aa&quot;,&quot;ss&quot;); 推倒不出</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">  compare&lt;&gt;(<span class="string">&quot;aa&quot;</span>, <span class="string">&quot;ss&quot;</span>);</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>比那一起优先把compare处理成函数名字，再去再去找模板</p>
+<h3 id="模板的非类型参数"><a href="#模板的非类型参数" class="headerlink" title="模板的非类型参数"></a>模板的非类型参数</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T, <span class="type">int</span> SIZE&gt;  <span class="comment">//SIZE是非类型参数</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">sort</span><span class="params">(T* arr)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; SIZE - <span class="number">1</span>; i++)</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">0</span>; j &lt; SIZE - <span class="number">1</span> - i; j++)</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="keyword">if</span> (arr[j] &gt; arr[j + <span class="number">1</span>])</span><br><span class="line">      &#123;</span><br><span class="line">        <span class="built_in">swap</span>(arr[j + <span class="number">1</span>], arr[j]);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="type">int</span> arr[] = &#123; <span class="number">1</span> ,<span class="number">4</span>,<span class="number">5</span>,<span class="number">32</span>,<span class="number">1</span>,<span class="number">23</span> &#125;;</span><br><span class="line">  <span class="type">const</span> <span class="type">int</span> sz = <span class="built_in">sizeof</span>(arr) / <span class="built_in">sizeof</span>(<span class="type">int</span>);</span><br><span class="line">  <span class="built_in">sort</span>&lt;<span class="type">int</span>, sz&gt;(arr);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">for</span> (<span class="type">int</span> i : arr)</span><br><span class="line">  &#123;</span><br><span class="line">    cout &lt;&lt; i &lt;&lt; <span class="string">&quot; &quot;</span>;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>模板的非类型参数 必须是整数类型（或者地址&#x2F;引用都可以）都是常量，不能修改，只能使用</p>
+<h3 id="类模板"><a href="#类模板" class="headerlink" title="类模板"></a>类模板</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">类模板</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Stack</span>  <span class="comment">//模板名称</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">  <span class="built_in">Stack</span>(<span class="type">int</span> _capacity = <span class="number">4</span>) :</span><br><span class="line">    _pstack(<span class="keyword">new</span> T[_capacity]),</span><br><span class="line">    _capacity(_capacity),</span><br><span class="line">    _size(<span class="number">0</span>)</span><br><span class="line">  &#123;&#125;</span><br><span class="line">  </span><br><span class="line">  <span class="function"><span class="type">void</span> <span class="title">push</span><span class="params">(T data)</span></span></span><br><span class="line"><span class="function">  </span>&#123;</span><br><span class="line">    _pstack[_size++] = data;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  ~<span class="built_in">Stack</span>()</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="keyword">delete</span> _pstack;</span><br><span class="line">    _pstack = <span class="literal">nullptr</span>;</span><br><span class="line">    _capacity = _size = <span class="number">0</span>;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="type">void</span> <span class="title">top</span><span class="params">()</span></span></span><br><span class="line"><span class="function">  </span>&#123;</span><br><span class="line">    cout &lt;&lt; _pstack[_size - <span class="number">1</span>] &lt;&lt; endl;</span><br><span class="line">  &#125;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">  T* _pstack;</span><br><span class="line">  <span class="type">int</span> _capacity;</span><br><span class="line">  <span class="type">int</span> _size; </span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  Stack&lt;<span class="type">int</span>&gt; s1;</span><br><span class="line">  s1.<span class="built_in">push</span>(<span class="number">4</span>);</span><br><span class="line">  s1.<span class="built_in">push</span>(<span class="number">3</span>);</span><br><span class="line">  s1.<span class="built_in">top</span>();</span><br><span class="line">  Stack&lt;<span class="type">double</span>&gt; s2;</span><br><span class="line">  s2.<span class="built_in">push</span>(<span class="number">2.0</span>);</span><br><span class="line">  s2.<span class="built_in">top</span>();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">c++</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2024/04/25/c-%E6%A8%A1%E6%9D%BF/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-c-cpp基础" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2024/04/24/c-cpp%E5%9F%BA%E7%A1%80/">cpp基础</a>
+    </h1>
+  
+
+        
+        <a href="/2024/04/24/c-cpp%E5%9F%BA%E7%A1%80/" class="archive-article-date">
+  	<time datetime="2024-04-24T09:30:55.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-04-24</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="1-内联函数"><a href="#1-内联函数" class="headerlink" title="1.内联函数"></a>1.内联函数</h3><p>inline内联函数：在编译过程中，就没有函数的调用开销了，再函数的调用点直接把函数的代码进行展开处理</p>
+<p>inline函数不在生成相应的函数符号</p>
+<p>inline只是建议编译器把这个函数处理成内联函数<br>不是所有函数都会处理成内联函数–递归</p>
+<p>debug版本，inline不起作用；再release版本出现</p>
+<p><strong>内联函数和普通函数的区别？</strong><br>表面上看：内联函数实在编译阶段进行的代码的替换，在主程序调用内联函数的位置把该函数进行展开<br>效率上看：函数的调用涉及到函数栈帧的创建与销毁，对于频繁且简单的函数设置为内联函数能极大的<br>减小系统开销</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">inline</span> <span class="type">int</span> <span class="title">sum</span><span class="params">(<span class="type">int</span> x, <span class="type">int</span> y)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">return</span> x + y;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="type">int</span> a = <span class="number">10</span>, b = <span class="number">20</span>;</span><br><span class="line">  <span class="type">int</span> ret = <span class="built_in">sum</span>(a, b);</span><br><span class="line">  <span class="comment">/*</span></span><br><span class="line"><span class="comment">  此处编译器处理：</span></span><br><span class="line"><span class="comment">  int ret = a + b;</span></span><br><span class="line"><span class="comment">  */</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="2-形参带默认值"><a href="#2-形参带默认值" class="headerlink" title="2.形参带默认值"></a>2.形参带默认值</h3><p>1.给默认值从右向左给<br>2.对比一下，如果给变量实参会多调用mov指令，使用带默认参数可以增加效率<br>3.再函数定义或者声明的时候，形参默认值只能出现一次</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">sum</span><span class="params">(<span class="type">int</span> a = <span class="number">1</span>, <span class="type">int</span> b = <span class="number">2</span>)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="type">int</span> a = <span class="number">10</span>;</span><br><span class="line">  <span class="type">int</span> b = <span class="number">20</span>;</span><br><span class="line">  <span class="type">int</span> ret = <span class="built_in">sum</span>(a, b);</span><br><span class="line">  <span class="comment">/*</span></span><br><span class="line"><span class="comment">  mov     eax,dword ptr [b]  </span></span><br><span class="line"><span class="comment">  push    eax  </span></span><br><span class="line"><span class="comment">  mov     ecx,dword ptr [a]  </span></span><br><span class="line"><span class="comment">  push    ecx </span></span><br><span class="line"><span class="comment">  call	sum</span></span><br><span class="line"><span class="comment">  */</span></span><br><span class="line"></span><br><span class="line">ret = <span class="built_in">sum</span>(a);</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">push  02H		</span></span><br><span class="line"><span class="comment">mov    eax,dword ptr [a]</span></span><br><span class="line"><span class="comment">push  eax</span></span><br><span class="line"><span class="comment">call  sum</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line">ret = <span class="built_in">sum</span>();</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">push  02H</span></span><br><span class="line"><span class="comment">push  01H</span></span><br><span class="line"><span class="comment">call  sum</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">sum</span><span class="params">(<span class="type">int</span> a, <span class="type">int</span> b)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">return</span> a + b;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-函数重载"><a href="#3-函数重载" class="headerlink" title="3.函数重载"></a>3.函数重载</h3><p>什么是函数的重载？<br>一组函数，函数名字相同，参数的类型或者个数不同<br>一组函数，称得上重载，一定是处在同一作用域<br>const或者colatile的时候，如果参数是普通变量，那么不是重载，如果是指针则可以</p>
+<p>1.c++为什么支持函数重载，c语言为什么不支持函数重载?<br>    c++代码产生函数符号的时候，函数名+参数列表类型组成<br>而c代码产生函数符号的时候，函数名来决定！</p>
+<p>2.函数重载需要注意些什么？</p>
+<p>3.c++和c语言代码之间如何互相调用?<br>    c调用c++:无法直接调用，把c++源码扩在extern “C”<br>c++调用c:把c函数的声明阔在extern “C”里面</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">bool</span> <span class="title">compare</span><span class="params">(<span class="type">int</span> a, <span class="type">int</span> b)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  cout &lt;&lt; <span class="string">&quot;compare_int_int&quot;</span> &lt;&lt; endl;</span><br><span class="line">  <span class="keyword">return</span> a &gt; b;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">bool</span> <span class="title">compare</span><span class="params">(<span class="type">double</span> a, <span class="type">double</span> b)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  cout &lt;&lt; <span class="string">&quot;compare_double_double&quot;</span> &lt;&lt; endl;</span><br><span class="line">  <span class="keyword">return</span> a &gt; b;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">bool</span> <span class="title">compare</span><span class="params">(<span class="type">const</span> <span class="type">char</span>* a, <span class="type">const</span> <span class="type">char</span>* b)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  cout &lt;&lt; <span class="string">&quot;compare_char*_char*&quot;</span> &lt;&lt; endl;</span><br><span class="line">  <span class="keyword">return</span> <span class="built_in">strcmp</span>(a, b) &gt; <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="built_in">compare</span>(<span class="number">10</span>, <span class="number">20</span>);</span><br><span class="line">  <span class="built_in">compare</span>(<span class="number">10.0</span>, <span class="number">20.0</span>);</span><br><span class="line">  <span class="built_in">compare</span>(<span class="string">&quot;aaa&quot;</span>, <span class="string">&quot;bbb&quot;</span>);</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">c++</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2024/04/24/c-cpp%E5%9F%BA%E7%A1%80/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-c-关联容器-无序关联容器" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2024/04/19/c-%E5%85%B3%E8%81%94%E5%AE%B9%E5%99%A8-%E6%97%A0%E5%BA%8F%E5%85%B3%E8%81%94%E5%AE%B9%E5%99%A8/">c++关联容器-无序关联容器</a>
+    </h1>
+  
+
+        
+        <a href="/2024/04/19/c-%E5%85%B3%E8%81%94%E5%AE%B9%E5%99%A8-%E6%97%A0%E5%BA%8F%E5%85%B3%E8%81%94%E5%AE%B9%E5%99%A8/" class="archive-article-date">
+  	<time datetime="2024-04-19T06:08:39.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-04-19</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>unordered</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">c++STL</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2024/04/19/c-%E5%85%B3%E8%81%94%E5%AE%B9%E5%99%A8-%E6%97%A0%E5%BA%8F%E5%85%B3%E8%81%94%E5%AE%B9%E5%99%A8/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-c-标准容器-容器适配器" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2024/04/14/c-%E6%A0%87%E5%87%86%E5%AE%B9%E5%99%A8-%E5%AE%B9%E5%99%A8%E9%80%82%E9%85%8D%E5%99%A8/">c++标准容器-容器适配器</a>
+    </h1>
+  
+
+        
+        <a href="/2024/04/14/c-%E6%A0%87%E5%87%86%E5%AE%B9%E5%99%A8-%E5%AE%B9%E5%99%A8%E9%80%82%E9%85%8D%E5%99%A8/" class="archive-article-date">
+  	<time datetime="2024-04-14T01:34:05.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-04-14</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="容器适配器"><a href="#容器适配器" class="headerlink" title="容器适配器"></a>容器适配器</h3><p>怎么理解适配器？</p>
+<p>适配器底层没有自己的数据结构，他是另外一个容器的封装，他的方法全部由<em><strong>底层依赖的容器</strong></em>进行实现。</p>
+<h4 id="1-stack"><a href="#1-stack" class="headerlink" title="1.stack"></a>1.stack</h4><p>stack	&#x3D;&gt;	dequeue</p>
+<p>为了满足栈“先进后出”的需求，deque更为合适，deque的缓冲区中有first和last两个指针访问缓冲区中的元素，无论是头插尾插、头删尾删都能满足。</p>
+<p>常用方法：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">push</span>() <span class="comment">//入栈</span></span><br><span class="line"><span class="built_in">pop</span>() <span class="comment">//出栈</span></span><br><span class="line"><span class="built_in">top</span>() <span class="comment">//访问栈顶元素</span></span><br><span class="line"><span class="built_in">empty</span>() <span class="comment">//元素是否为空</span></span><br><span class="line"><span class="built_in">size</span>() <span class="comment">//返回元素个数</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="2-queue"><a href="#2-queue" class="headerlink" title="2.queue"></a>2.queue</h4><p>queue	&#x3D;&gt;	deque</p>
+<p>为什么使用deque而不使用vector实现？</p>
+<p>1.特性来看：queue需要满足“<strong>先进先出</strong>”（头插尾删、头删尾插）的特性，如果使用vector删除元素或者添加元素与特性相结合总会出现，内存向后或者向前覆盖的情况，而deque没用这种窘境。</p>
+<p>2.效率来看：deque虽然维护复杂度高，但是效率远大于vector，如扩容时vector1-&gt;2-&gt;4-&gt;8-&gt;16….</p>
+<p>3.内存来看：vector需要大片连续的内存，而deque需要的是一段一段的内存。</p>
+<h4 id="3-priority-queue"><a href="#3-priority-queue" class="headerlink" title="3.priority_queue"></a>3.priority_queue</h4><p>priority_queue &#x3D;&#x3D;&gt; vector</p>
+<p>priority_queue：push入队 pop出队 top查看队顶元素 empty判断队空  size返回元素个数  </p>
+<p>默认：大根堆</p>
+<p>底层默认吧数据组成一个大根堆结构 在一个内存连续的数组上构建一个大根堆或者小根堆</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">c++STL</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2024/04/14/c-%E6%A0%87%E5%87%86%E5%AE%B9%E5%99%A8-%E5%AE%B9%E5%99%A8%E9%80%82%E9%85%8D%E5%99%A8/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-c-标准容器-deque" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2024/04/13/c-%E6%A0%87%E5%87%86%E5%AE%B9%E5%99%A8-deque/">c-标准容器-deque</a>
+    </h1>
+  
+
+        
+        <a href="/2024/04/13/c-%E6%A0%87%E5%87%86%E5%AE%B9%E5%99%A8-deque/" class="archive-article-date">
+  	<time datetime="2024-04-13T03:50:53.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-04-13</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="dequeue-双端队列容器"><a href="#dequeue-双端队列容器" class="headerlink" title="dequeue:双端队列容器"></a>dequeue:双端队列容器</h3><h4 id="1-底层数据结构"><a href="#1-底层数据结构" class="headerlink" title="1.底层数据结构"></a>1.底层数据结构</h4><p>dequeue的底层数据结构是一个动态开辟的二维数组，是由<em><strong>一段一段的定量的</strong></em>连续空间构成。</p>
+<p>如果需要扩容就会再申请一段内存拼接到deque的首或尾，“拼接”这个工作是由mapper(映射器)完成。</p>
+<p>在这个第二维数组里，会有两个指针来维护数组，保证数据的插入删除。</p>
+<p><img src="/../picture/c-%E6%A0%87%E5%87%86%E5%AE%B9%E5%99%A8-deque/1711725873273.png" alt="扩容之前"></p>
+<p><img src="/../picture/c-%E6%A0%87%E5%87%86%E5%AE%B9%E5%99%A8-deque/1711725905424.png" alt="扩容之后"></p>
+<h4 id="2-插入"><a href="#2-插入" class="headerlink" title="2.插入"></a>2.插入</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//增加：</span></span><br><span class="line">deq.<span class="built_in">push_back</span>(<span class="number">20</span>)；<span class="comment">//从末尾添加元素O(1)</span></span><br><span class="line">deq.<span class="built_in">push_front</span>(<span class="number">20</span>)；<span class="comment">//从首部添加元素O(1)  //vec.insert(vec.begin(), 20)  O(n)</span></span><br><span class="line">deq.<span class="built_in">insert</span>(it, <span class="number">20</span>)； it指向位置添加元素<span class="built_in">O</span>(n)</span><br></pre></td></tr></table></figure>
+
+<h4 id="3-删除"><a href="#3-删除" class="headerlink" title="3.删除"></a>3.删除</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//删除：</span></span><br><span class="line">deq.<span class="built_in">pop_back</span>()；<span class="comment">//从末尾删除元素 O(1)</span></span><br><span class="line">deq.<span class="built_in">pop_front</span>()；<span class="comment">//从首部删除元素 O(1)</span></span><br><span class="line">deq.<span class="built_in">erase</span>(it)；<span class="comment">//从it指向的位置删除元素O(n)</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="4-查询"><a href="#4-查询" class="headerlink" title="4.查询"></a>4.查询</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//查询搜索：</span></span><br><span class="line">iterator<span class="comment">//（连续的insert和erase一定要考虑迭代器失效的问题）</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="5-需要注意的几个问题？"><a href="#5-需要注意的几个问题？" class="headerlink" title="5.需要注意的几个问题？"></a>5.需要注意的几个问题？</h4><h5 id=""><a href="#" class="headerlink" title=""></a></h5>
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">c++STL</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2024/04/13/c-%E6%A0%87%E5%87%86%E5%AE%B9%E5%99%A8-deque/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-c-标准容器-vector" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -363,7 +966,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2024/04/10/c-const/">const</a>
+      <a class="article-title" href="/2024/04/10/c-const/">const测试</a>
     </h1>
   
 
@@ -422,630 +1025,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2024/04/10/c-const/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-c++内存管理" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2024/04/09/c++%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/">内存管理</a>
-    </h1>
-  
-
-        
-        <a href="/2024/04/09/c++%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/" class="archive-article-date">
-  	<time datetime="2024-04-09T13:17:01.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-04-09</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="动态内存开辟"><a href="#动态内存开辟" class="headerlink" title="动态内存开辟"></a>动态内存开辟</h3><p>c语言中是调用malloc()、calloc()、realloc()函数动态开辟内存，free函数释放内存。</p>
-<p>c++中给出了new关键字开辟内存，以及delete关键字释放内存。</p>
-<h3 id="用法："><a href="#用法：" class="headerlink" title="用法："></a>用法：</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//开辟一个整型变量大小的内存</span></span><br><span class="line"><span class="comment">//c</span></span><br><span class="line"><span class="type">int</span>* p = (<span class="type">int</span>*)<span class="built_in">malloc</span>(<span class="built_in">sizeof</span>(<span class="type">int</span>));</span><br><span class="line"><span class="keyword">if</span>(p == <span class="literal">nullptr</span>)</span><br><span class="line">&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">free</span>(p);</span><br><span class="line"><span class="comment">//c++</span></span><br><span class="line"><span class="type">int</span>* q = <span class="keyword">new</span> <span class="type">int</span>; <span class="comment">//此时未初始化 int* q = new int&#123;&#125;;初始化为0</span></span><br><span class="line"><span class="built_in">delete</span>(q);</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//开辟一个整型大小为20的内存</span></span><br><span class="line"><span class="comment">//c</span></span><br><span class="line"><span class="type">int</span>* arr1 = (<span class="type">int</span>*)<span class="built_in">malloc</span>(<span class="built_in">sizeof</span>(<span class="type">int</span>) * <span class="number">20</span>);</span><br><span class="line"><span class="keyword">if</span>(arr1 == <span class="literal">nullptr</span>)</span><br><span class="line">&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">free</span>(arr1);</span><br><span class="line"><span class="comment">//c++</span></span><br><span class="line"><span class="type">int</span>* arr2 = <span class="keyword">new</span> <span class="type">int</span>[<span class="number">20</span>];<span class="comment">//此时未初始化 int* arr = new int[20]&#123;&#125;;全0</span></span><br><span class="line"><span class="keyword">delete</span>[] arr2;</span><br></pre></td></tr></table></figure>
-
-<h3 id="注意："><a href="#注意：" class="headerlink" title="注意："></a><strong>注意</strong>：</h3><h4 id="1-初始化问题"><a href="#1-初始化问题" class="headerlink" title="1.初始化问题"></a>1.初始化问题</h4><p>想要申请内存同时初始化这片内存值为0，c中调用calloc()函数，c++中直接使用初始化列表即可。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//c</span></span><br><span class="line"><span class="type">int</span>* arr1 = (<span class="type">int</span>*)<span class="built_in">calloc</span>(<span class="number">20</span>, <span class="built_in">sizeof</span>(<span class="type">int</span>));</span><br><span class="line"><span class="keyword">if</span> (arr1 == <span class="literal">NULL</span>) <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line"><span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; <span class="number">20</span>; i++)</span><br><span class="line">&#123;</span><br><span class="line">  cout &lt;&lt; arr1[i] &lt;&lt; <span class="string">&quot; &quot;</span>;<span class="comment">// 000000000...</span></span><br><span class="line">&#125;</span><br><span class="line">cout &lt;&lt; endl;</span><br><span class="line"><span class="comment">//c++</span></span><br><span class="line"><span class="type">int</span>* arr2 = <span class="keyword">new</span> <span class="type">int</span>[<span class="number">20</span>] &#123;&#125;;</span><br><span class="line"><span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; <span class="number">20</span>; i++)</span><br><span class="line">&#123;</span><br><span class="line">  cout &lt;&lt; arr2[i] &lt;&lt; <span class="string">&quot; &quot;</span>;<span class="comment">// 00000000...</span></span><br><span class="line">&#125;</span><br><span class="line">cout &lt;&lt; endl;</span><br></pre></td></tr></table></figure>
-
-<h4 id="2-开辟内存失败怎么办？"><a href="#2-开辟内存失败怎么办？" class="headerlink" title="2.开辟内存失败怎么办？"></a>2.开辟内存失败怎么办？</h4><p>malloc内存开辟失败是通过返回值与NULL比较；new内存开辟失败会抛出异常。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//new的异常捕获</span></span><br><span class="line"><span class="keyword">try</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="type">int</span>* p = <span class="keyword">new</span> <span class="type">int</span>[<span class="number">10</span>];</span><br><span class="line">  <span class="comment">//后续正常处理</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">catch</span>(std::bad_alloc)</span><br><span class="line">&#123;</span><br><span class="line">  <span class="comment">//异常处理</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h4 id="3-定位new"><a href="#3-定位new" class="headerlink" title="3.定位new"></a>3.定位new</h4><p>为程序员提供了一种通过内存位置修改其值的方式。</p>
-<p>定位new运算符不需要相应的delete运算符来释放内存，因为它本身就<em>不开辟新的内存</em>。 </p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//正确用法</span></span><br><span class="line"><span class="type">int</span> data = <span class="number">90</span>;</span><br><span class="line"><span class="type">int</span>* p1 = <span class="built_in">new</span> (&amp;data) <span class="built_in">int</span>(<span class="number">20</span>);<span class="comment">//ok</span></span><br><span class="line"><span class="comment">//错误用法</span></span><br><span class="line"><span class="type">int</span>* p2 = <span class="built_in">new</span> (&amp;data) <span class="type">int</span>[<span class="number">5</span>]&#123;&#125;;</span><br><span class="line">p2[<span class="number">3</span>] = <span class="number">10</span>;<span class="comment">//编译通过，执行出错！p2所指的只能有一个int大小</span></span><br></pre></td></tr></table></figure>
-
-<h4 id="4-new有多少种用法"><a href="#4-new有多少种用法" class="headerlink" title="4.new有多少种用法?"></a>4.new有多少种用法?</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//1.普通用法</span></span><br><span class="line"><span class="type">int</span>* p1 = <span class="keyword">new</span> <span class="built_in">int</span>(<span class="number">10</span>);</span><br><span class="line"><span class="comment">//2.不抛出异常new</span></span><br><span class="line"><span class="type">int</span>* p2 = <span class="built_in">new</span>(nothrow) <span class="type">int</span>;</span><br><span class="line"><span class="comment">//3.定义常量</span></span><br><span class="line"><span class="type">const</span> <span class="type">int</span>* p3 = <span class="keyword">new</span> <span class="type">const</span> <span class="type">int</span>;</span><br><span class="line"><span class="comment">//4.定位new</span></span><br><span class="line"><span class="type">int</span> data = <span class="number">0</span>;</span><br><span class="line"><span class="type">int</span>* p4 = <span class="built_in">new</span> (&amp;data) <span class="built_in">int</span>(<span class="number">50</span>);</span><br></pre></td></tr></table></figure>
-
-<h3 id="new-malloc区别："><a href="#new-malloc区别：" class="headerlink" title="new&#x2F;malloc区别："></a>new&#x2F;malloc区别：</h3><ol>
-<li>new是关键字，malloc()是函数。</li>
-<li>new无返回值，malloc()需要指定其返回类型。</li>
-<li>new通过异常捕获程序判断其是否内存开辟失败，malloc()通过返回值判断。</li>
-<li>new通过初始化列表直接初始化，calloc()可以初始化为0。</li>
-<li>new通过类型名自动计算大小，malloc()需要手动计算。</li>
-</ol>
-<h3 id="delete-free区别："><a href="#delete-free区别：" class="headerlink" title="delete&#x2F;free区别："></a>delete&#x2F;free区别：</h3><ol>
-<li>delete是关键字，free()是函数。</li>
-<li>delete处理数组要加[]，free()只需要传入首地址指针。</li>
-<li>delete会调用对象析构函数，free()不会！</li>
-</ol>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">c++</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2024/04/09/c++%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-c++地址划分" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2024/04/09/c++%E5%9C%B0%E5%9D%80%E5%88%92%E5%88%86/">进程的虚拟地址空间内存划分和布局</a>
-    </h1>
-  
-
-        
-        <a href="/2024/04/09/c++%E5%9C%B0%E5%9D%80%E5%88%92%E5%88%86/" class="archive-article-date">
-  	<time datetime="2024-04-09T07:39:38.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-04-09</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="计算机中内存空间划分"><a href="#计算机中内存空间划分" class="headerlink" title="计算机中内存空间划分"></a>计算机中内存空间划分</h3><p><img src="/../picture/c-01/1712668303567.png" alt="内存分布"></p>
-<p>.text：代码段，保存代码</p>
-<p>.rodata：只读数据段，如字符串</p>
-<p>.data：数据段，如全局变量</p>
-<p>.heap：堆，如动态开辟的内存</p>
-<p>stack：栈，如函数内部局部变量</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">c++</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2024/04/09/c++%E5%9C%B0%E5%9D%80%E5%88%92%E5%88%86/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-八大排序" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2024/04/03/%E5%85%AB%E5%A4%A7%E6%8E%92%E5%BA%8F/">八大排序</a>
-    </h1>
-  
-
-        
-        <a href="/2024/04/03/%E5%85%AB%E5%A4%A7%E6%8E%92%E5%BA%8F/" class="archive-article-date">
-  	<time datetime="2024-04-03T06:35:54.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-04-03</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">数据结构</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2024/04/03/%E5%85%AB%E5%A4%A7%E6%8E%92%E5%BA%8F/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-tcp-udp协议" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2024/03/23/tcp-udp%E5%8D%8F%E8%AE%AE/">tcp/udp协议</a>
-    </h1>
-  
-
-        
-        <a href="/2024/03/23/tcp-udp%E5%8D%8F%E8%AE%AE/" class="archive-article-date">
-  	<time datetime="2024-03-23T09:17:15.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-03-23</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="1-TCP服务的特点"><a href="#1-TCP服务的特点" class="headerlink" title="1.TCP服务的特点"></a>1.TCP服务的特点</h3><p>tcp是面向连接的、可靠的、流式服务。</p>
-<p>1.1面向连接</p>
-<p>tcp协议的连接是一对一的，全双工的。</p>
-<p>使用tcp协议通信的双方必须先建立连接，然后才能开始数据的读写。（双方要为连接分配内核资源，比如：连接的状态、读写缓冲区、定时器等）</p>
-<blockquote>
-<p>全双工：双方可以相互发送数据。</p>
-<p>半双工：同一时刻，只允许由一段向另一端发送数据。</p>
-<p>单工：只允许在一个方向上传输。</p>
-</blockquote>
-<p>1.2可靠</p>
-<p>首先tcp协议采用发送应答机制、超时重传机制来确保数据能可靠的从发送端送往接收端。</p>
-<p>其次tcp报文段是以IP数据报发送的，而IP数据报到达接收端可能会乱序，重复，所以TCP协议还会对接收到的TCP报文段重拍、整理，再交付给应用层。</p>
-<p>1.3字节流</p>
-<p>相比于udp的数据报服务来说，tcp是字节流服务，所谓“流”是没有边界的，可以源源不断地从一端流向另一端，因此如何控制这些字节流在实际编程中就很重要，通常在应用中要严格控制双方相同的读写次数，以及每次读取到的数据大小，确保每次接收端拿到的数据大小是发送端想让其拿到的。（不是绝对的）</p>
-<p>在发送端多次进行读写操作时，内核会先将要发送的数据放入发送缓冲区中，然后这些在发送缓冲区的数据会被封装成一个个报文段发出。</p>
-<p>当接收端收到这些报文段，会先将其按照TCP报文段的序号放在接受缓冲区中，然后接收端按需要取出数据。（如图）</p>
-<p><img src="/../picture/tcp-udp%E5%8D%8F%E8%AE%AE/1711225330805.png" alt="缓冲区"></p>
-<blockquote>
-<p>粘包：</p>
-<p>为什么会出现粘包？</p>
-<p>发送端多次发送的数据，先存放在接收端的接收缓冲区里，然后被接收端一次收到。</p>
-<p>如何解决？</p>
-<ul>
-<li>一次发送对应一次接收。</li>
-<li>在数据报中添加一个标志。（如##12312432$$，##表示数据开始$$表示一次数据的结尾）</li>
-<li>指定一种协议。（如Json协议，每次取出其中想要的数据）</li>
-</ul>
-</blockquote>
-<h3 id="2-TCP的建立和连接"><a href="#2-TCP的建立和连接" class="headerlink" title="2.TCP的建立和连接"></a>2.TCP的建立和连接</h3><p>三次握手发生在客户端执行connect()的时候，该方法返回成功则说明</p>
-<p><img src="/../picture/tcp-udp%E5%8D%8F%E8%AE%AE/1711318787258.png" alt="tcp头部结构"></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">linux</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2024/03/23/tcp-udp%E5%8D%8F%E8%AE%AE/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-this" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2024/03/10/this/">this</a>
-    </h1>
-  
-
-        
-        <a href="/2024/03/10/this/" class="archive-article-date">
-  	<time datetime="2024-03-10T11:16:15.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-03-10</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>编译器针对程序员自己设计的类型分三次编译。</p>
-<p> 第一：识别和记录类体中属性的名称，类型和访问限定，与属性在类体中的位置无关。如 class CGoods NameAmountPriceTotal_value;</p>
-<p>  第二：识别和记录类体中函数原型（返回类型+函数名+参数列表），形参的默认值，访问限定。不识别函数体。  </p>
-<p>  第三：改写在类中定义函数的参数列表和函数体，改写对象调用成员函数的形式；  </p>
-<p>this指针的特点：</p>
-<ol>
-<li>this指针自身为常性，不能更改其值。</li>
-<li>指向当前调用成员函数的对象。</li>
-<li>不需要定义，直接使用。</li>
-</ol>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">c++</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2024/03/10/this/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-leetcode" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2024/03/07/leetcode/">leetcode</a>
-    </h1>
-  
-
-        
-        <a href="/2024/03/07/leetcode/" class="archive-article-date">
-  	<time datetime="2024-03-07T10:50:47.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-03-07</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="160-相交链表"><a href="#160-相交链表" class="headerlink" title="160.相交链表"></a>160.相交链表</h3><p><img src="/picture/leetcode/1709808748368.png" alt="相交链表"></p>
-<p>暴力遍历:</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for singly-linked list.</span></span><br><span class="line"><span class="comment"> * struct ListNode &#123;</span></span><br><span class="line"><span class="comment"> *     int val;</span></span><br><span class="line"><span class="comment"> *     ListNode *next;</span></span><br><span class="line"><span class="comment"> *     ListNode(int x) : val(x), next(NULL) &#123;&#125;</span></span><br><span class="line"><span class="comment"> * &#125;;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">ListNode *<span class="title">getIntersectionNode</span><span class="params">(ListNode *headA, ListNode *headB)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(!headA &amp;&amp; !headB)</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">nullptr</span>;</span><br><span class="line">        ListNode* p = headB;</span><br><span class="line">        <span class="keyword">while</span>(headA != <span class="literal">NULL</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">while</span>(headB != <span class="literal">NULL</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">if</span>(headA-&gt;val == headB-&gt;val &amp;&amp; headA == headB)</span><br><span class="line">                &#123;</span><br><span class="line">                    <span class="keyword">return</span> headA;</span><br><span class="line">                &#125;</span><br><span class="line">                </span><br><span class="line">                headB = headB-&gt;next;</span><br><span class="line">            &#125;</span><br><span class="line">            headA = headA-&gt;next;</span><br><span class="line">            headB = p;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">nullptr</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>o(n)做法:</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">ListNode* <span class="title">getIntersectionNode</span><span class="params">(ListNode* headA, ListNode* headB)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (!headA || !headB)</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line"></span><br><span class="line">        ListNode *p1 = headA, *p2 = headB;</span><br><span class="line">        <span class="keyword">while</span> (p1 != p2) &#123;</span><br><span class="line">            <span class="keyword">if</span> (p1 == <span class="literal">NULL</span>) &#123;</span><br><span class="line">                p1 = headB;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                p1 = p1-&gt;next;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (p2 == <span class="literal">NULL</span>) &#123;</span><br><span class="line">                p2 = headA;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                p2 = p2-&gt;next;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> p1;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="203-移除链表元素"><a href="#203-移除链表元素" class="headerlink" title="203.移除链表元素"></a>203.移除链表元素</h3><p><img src="/picture/leetcode/1709879679340.png" alt="移除链表元素"></p>
-<p>双指针遍历：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for singly-linked list.</span></span><br><span class="line"><span class="comment"> * struct ListNode &#123;</span></span><br><span class="line"><span class="comment"> *     int val;</span></span><br><span class="line"><span class="comment"> *     ListNode *next;</span></span><br><span class="line"><span class="comment"> *     ListNode() : val(0), next(nullptr) &#123;&#125;</span></span><br><span class="line"><span class="comment"> *     ListNode(int x) : val(x), next(nullptr) &#123;&#125;</span></span><br><span class="line"><span class="comment"> *     ListNode(int x, ListNode *next) : val(x), next(next) &#123;&#125;</span></span><br><span class="line"><span class="comment"> * &#125;;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">ListNode* <span class="title">removeElements</span><span class="params">(ListNode* head, <span class="type">int</span> val)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(head == <span class="literal">nullptr</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">nullptr</span>;</span><br><span class="line"></span><br><span class="line">        ListNode* dummy = <span class="keyword">new</span> <span class="built_in">ListNode</span>(<span class="number">0</span>);</span><br><span class="line">        dummy-&gt;next = head;</span><br><span class="line"></span><br><span class="line">        ListNode* pre = dummy;</span><br><span class="line">        <span class="keyword">while</span>(head != <span class="literal">nullptr</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span>(head-&gt;val == val)</span><br><span class="line">            &#123;</span><br><span class="line">                pre-&gt;next = head-&gt;next;</span><br><span class="line">                <span class="keyword">delete</span> head;</span><br><span class="line">                head = pre-&gt;next;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">            &#123;</span><br><span class="line">                pre = pre-&gt;next;</span><br><span class="line">                head = head-&gt;next;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> dummy-&gt;next;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<p>虚拟头节点单指针遍历：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">ListNode* <span class="title">removeElements</span><span class="params">(ListNode* head, <span class="type">int</span> val)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(head == <span class="literal">nullptr</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">nullptr</span>;</span><br><span class="line"></span><br><span class="line">        ListNode* dummy = <span class="keyword">new</span> <span class="built_in">ListNode</span>(<span class="number">0</span>);</span><br><span class="line">        dummy-&gt;next = head;</span><br><span class="line"></span><br><span class="line">        ListNode* p = dummy;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span>(p != <span class="literal">nullptr</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span>(p-&gt;next == <span class="literal">nullptr</span>)</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">if</span>(p-&gt;next-&gt;val ==val)</span><br><span class="line">            &#123;</span><br><span class="line">                p-&gt;next = p-&gt;next-&gt;next;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">            p = p-&gt;next;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> dummy-&gt;next;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<p>递归：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">ListNode* <span class="title">removeElements</span><span class="params">(ListNode* head, <span class="type">int</span> val)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (head == <span class="literal">nullptr</span>)    <span class="comment">//首先判断是否遍历完链表</span></span><br><span class="line">            <span class="keyword">return</span> <span class="literal">nullptr</span>;</span><br><span class="line">        head-&gt;next = <span class="built_in">removeElements</span>(head-&gt;next, val); <span class="comment">//没有则继续进入</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (head-&gt;val == val)   <span class="comment">//如果是要删除的节点，则返回这个节点的下一个</span></span><br><span class="line">            <span class="keyword">return</span> head-&gt;next;</span><br><span class="line">        <span class="keyword">else</span>                    <span class="comment">//不是，继续返回</span></span><br><span class="line">            <span class="keyword">return</span> head;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<h3 id=""><a href="#" class="headerlink" title=""></a></h3><h3 id="206-反转链表"><a href="#206-反转链表" class="headerlink" title="206.反转链表"></a>206.反转链表</h3><p><img src="/picture/leetcode/1709882309998.png" alt="反转链表"></p>
-<p>暴力解法:</p>
-<p><img src="/picture/leetcode/1709882347307.png"></p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">ListNode* <span class="title">reverseList</span><span class="params">(ListNode* head)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (head == <span class="literal">nullptr</span>)</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">nullptr</span>;</span><br><span class="line">        <span class="comment">// ListNode* dummy = new ListNode(0);</span></span><br><span class="line">        <span class="comment">// ListNode* p = dummy;</span></span><br><span class="line">        <span class="keyword">if</span> (head-&gt;next == <span class="literal">nullptr</span>)</span><br><span class="line">            <span class="keyword">return</span> head;</span><br><span class="line">        ListNode *p = head-&gt;next, *q = p;</span><br><span class="line">        head-&gt;next = <span class="literal">nullptr</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span> (p != <span class="literal">nullptr</span> &amp;&amp; p-&gt;next != <span class="literal">nullptr</span>) &#123;</span><br><span class="line">            q = p-&gt;next;</span><br><span class="line">            p-&gt;next = head;</span><br><span class="line">            head = p;</span><br><span class="line">            p = q;</span><br><span class="line">        &#125;</span><br><span class="line">        p-&gt;next = head;</span><br><span class="line">        <span class="keyword">return</span> p;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<p>递归一:</p>
-<p>边改变链表，边递归</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">ListNode* <span class="title">reverseList</span><span class="params">(ListNode* head, ListNode* pre = <span class="literal">nullptr</span>)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (head == <span class="literal">nullptr</span>)</span><br><span class="line">            <span class="keyword">return</span> pre;     <span class="comment">//退出条件</span></span><br><span class="line"></span><br><span class="line">        ListNode* next = head-&gt;next;    <span class="comment">//保存head的下一个节点</span></span><br><span class="line">        head-&gt;next = pre;               <span class="comment">//更改head指向</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">reverseList</span>(next, head);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<p>递归二:</p>
-<p>先递归找到最后一个元素，再返回做操作</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">ListNode* <span class="title">reverseList</span><span class="params">(ListNode* head)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (head == <span class="literal">nullptr</span> || head-&gt;next == <span class="literal">nullptr</span>)</span><br><span class="line">            <span class="keyword">return</span> head;</span><br><span class="line"></span><br><span class="line">        ListNode* newhead = <span class="built_in">reverseList</span>(head-&gt;next); <span class="comment">// 由于第一个条件</span></span><br><span class="line">        <span class="comment">// newhead只会保存新的头</span></span><br><span class="line">        <span class="comment">// 最基本的操作</span></span><br><span class="line">        head-&gt;next-&gt;next = head;</span><br><span class="line">        head-&gt;next = <span class="literal">nullptr</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> newhead;</span><br><span class="line">        <span class="comment">// 这里的返回只会返回newhead</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<h3 id="141-环形链表"><a href="#141-环形链表" class="headerlink" title="141.环形链表"></a>141.环形链表</h3><p><img src="/picture/leetcode/1709948177383.png" alt="环形链表"></p>
-<p>快慢指针:</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">bool</span> <span class="title">hasCycle</span><span class="params">(ListNode *head)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span>(head == <span class="literal">nullptr</span> || head-&gt;next == <span class="literal">nullptr</span>)</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        ListNode*p = head, *q = head-&gt;next;</span><br><span class="line">        <span class="keyword">while</span>(p != <span class="literal">nullptr</span> &amp;&amp; q != <span class="literal">nullptr</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span>(p-&gt;next == <span class="literal">nullptr</span> || q-&gt;next == <span class="literal">nullptr</span> || q-&gt;next-&gt;next == <span class="literal">nullptr</span>)</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">            p = p-&gt;next;</span><br><span class="line">            q = q-&gt;next-&gt;next;</span><br><span class="line">            <span class="keyword">if</span>(p != <span class="literal">nullptr</span> &amp;&amp; q != <span class="literal">nullptr</span> &amp;&amp; p == q)</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2024/03/07/leetcode/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-mysql" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2024/02/21/mysql/">mysql</a>
-    </h1>
-  
-
-        
-        <a href="/2024/02/21/mysql/" class="archive-article-date">
-  	<time datetime="2024-02-21T05:30:44.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-02-21</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="一、数据库介绍"><a href="#一、数据库介绍" class="headerlink" title="一、数据库介绍"></a>一、数据库介绍</h3><h4 id="1-数据库概念"><a href="#1-数据库概念" class="headerlink" title="1.数据库概念"></a>1.数据库概念</h4><p>数据库：存放数据的一个仓库，按数据结构来管理和存储数据的计算机软件系统。</p>
-<p>数据库管理系统：数据库的核心，主要完成对数据的操控。</p>
-<p>RDBMS:关系数据管理系统。</p>
-<p>SQL:结构化查询语言。</p>
-<p>mysql是c&#x2F;s（客户端、服务器端）类型的数据库，用户通过在客户端输入账号密码登录到服务器端后进行对数据库的操作。</p>
-<p><img src="/picture/mysql/1708493867602.png"></p>
-<h4 id="2-数据库分类"><a href="#2-数据库分类" class="headerlink" title="2.数据库分类"></a>2.数据库分类</h4><p>关系型数据库：通过二维表来表示数据间的各种关系。</p>
-<p>关系型数据库核心元素：数据行（一条记录），数据列(字段)， 数据表（数据行的集合），数据库（数 据表的集合）。 </p>
-<p>关系型数据库产品： oracle , mysql, sqlite ,DB2, Microsoft Sql Server </p>
-<p>非关系型数据库(nosql)：是指非关系型的、分布式的，不遵循ACID原则的数据存储系统。</p>
-<p> 非关系型数据库产品： memcache , redis , mongodb, hbase </p>
-<p>二、数据库基本操作</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">mysql</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2024/02/21/mysql/">展开全文 >></a>
         </p>
       
 
@@ -1176,7 +1155,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">c++STL</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">c++ STL</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">linux</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1185,10 +1172,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">shell</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">linux</a>
               </li>
              
               <li class="article-tag-list-item">

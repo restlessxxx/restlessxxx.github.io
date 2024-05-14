@@ -6,22 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://restlessxxx.github.io">
-  <title>EVEN&#39;s new bolg</title>
+  <title>c++标准容器-容器适配器 | EVEN&#39;s new bolg</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="title:textdate:2024-02-20 23:29:56tags:1typora-root-url:..">
+  <meta name="description" content="容器适配器怎么理解适配器？ 适配器底层没有自己的数据结构，他是另外一个容器的封装，他的方法全部由底层依赖的容器进行实现。 1.stackstack	&#x3D;&gt;	dequeue 为了满足栈“先进后出”的需求，deque更为合适，deque的缓冲区中有first和last两个指针访问缓冲区中的元素，无论是头插尾插、头删尾删都能满足。 常用方法： 12345push() &#x2F;&#x2F;入栈pop() &#x2F;">
 <meta property="og:type" content="article">
-<meta property="og:title" content="EVEN&#39;s new bolg">
-<meta property="og:url" content="https://restlessxxx.github.io/2024/02/20/text/index.html">
+<meta property="og:title" content="c++标准容器-容器适配器">
+<meta property="og:url" content="https://restlessxxx.github.io/2024/04/14/c-%E6%A0%87%E5%87%86%E5%AE%B9%E5%99%A8-%E5%AE%B9%E5%99%A8%E9%80%82%E9%85%8D%E5%99%A8/index.html">
 <meta property="og:site_name" content="EVEN&#39;s new bolg">
-<meta property="og:description" content="title:textdate:2024-02-20 23:29:56tags:1typora-root-url:..">
+<meta property="og:description" content="容器适配器怎么理解适配器？ 适配器底层没有自己的数据结构，他是另外一个容器的封装，他的方法全部由底层依赖的容器进行实现。 1.stackstack	&#x3D;&gt;	dequeue 为了满足栈“先进后出”的需求，deque更为合适，deque的缓冲区中有first和last两个指针访问缓冲区中的元素，无论是头插尾插、头删尾删都能满足。 常用方法： 12345push() &#x2F;&#x2F;入栈pop() &#x2F;">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://restlessxxx.github.io/picture/text/1708443062304.png">
-<meta property="og:image" content="https://restlessxxx.github.io/picture/text/1708443173580.png">
-<meta property="article:published_time" content="2024-02-20T15:29:56.281Z">
-<meta property="article:modified_time" content="2024-02-20T15:33:07.492Z">
+<meta property="article:published_time" content="2024-04-14T01:34:05.000Z">
+<meta property="article:modified_time" content="2024-04-19T06:05:57.818Z">
 <meta property="article:author" content="Even">
+<meta property="article:tag" content="c++STL">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://restlessxxx.github.io/picture/text/1708443062304.png">
   
     <link rel="alternative" href="/atom.xml" title="EVEN&#39;s new bolg" type="application/atom+xml">
   
@@ -157,14 +155,42 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-text" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-c-标准容器-容器适配器" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      c++标准容器-容器适配器
+    </h1>
+  
+
+        
+        <a href="/2024/04/14/c-%E6%A0%87%E5%87%86%E5%AE%B9%E5%99%A8-%E5%AE%B9%E5%99%A8%E9%80%82%E9%85%8D%E5%99%A8/" class="archive-article-date">
+  	<time datetime="2024-04-14T01:34:05.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-04-14</time>
+</a>
+        
+      </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <hr>
-<h2 id="title-textdate-2024-02-20-23-29-56tags-1typora-root-url"><a href="#title-textdate-2024-02-20-23-29-56tags-1typora-root-url" class="headerlink" title="title:textdate:2024-02-20 23:29:56tags:1typora-root-url:.."></a>title:text<br>date:2024-02-20 23:29:56<br>tags:1<br>typora-root-url:..</h2><p><img src="/picture/text/1708443062304.png" alt="1708443062304"></p>
-<p><img src="/picture/text/1708443173580.png" alt="1708443173580"></p>
+        <h3 id="容器适配器"><a href="#容器适配器" class="headerlink" title="容器适配器"></a>容器适配器</h3><p>怎么理解适配器？</p>
+<p>适配器底层没有自己的数据结构，他是另外一个容器的封装，他的方法全部由<em><strong>底层依赖的容器</strong></em>进行实现。</p>
+<h4 id="1-stack"><a href="#1-stack" class="headerlink" title="1.stack"></a>1.stack</h4><p>stack	&#x3D;&gt;	dequeue</p>
+<p>为了满足栈“先进后出”的需求，deque更为合适，deque的缓冲区中有first和last两个指针访问缓冲区中的元素，无论是头插尾插、头删尾删都能满足。</p>
+<p>常用方法：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">push</span>() <span class="comment">//入栈</span></span><br><span class="line"><span class="built_in">pop</span>() <span class="comment">//出栈</span></span><br><span class="line"><span class="built_in">top</span>() <span class="comment">//访问栈顶元素</span></span><br><span class="line"><span class="built_in">empty</span>() <span class="comment">//元素是否为空</span></span><br><span class="line"><span class="built_in">size</span>() <span class="comment">//返回元素个数</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="2-queue"><a href="#2-queue" class="headerlink" title="2.queue"></a>2.queue</h4><p>queue	&#x3D;&gt;	deque</p>
+<p>为什么使用deque而不使用vector实现？</p>
+<p>1.特性来看：queue需要满足“<strong>先进先出</strong>”（头插尾删、头删尾插）的特性，如果使用vector删除元素或者添加元素与特性相结合总会出现，内存向后或者向前覆盖的情况，而deque没用这种窘境。</p>
+<p>2.效率来看：deque虽然维护复杂度高，但是效率远大于vector，如扩容时vector1-&gt;2-&gt;4-&gt;8-&gt;16….</p>
+<p>3.内存来看：vector需要大片连续的内存，而deque需要的是一段一段的内存。</p>
+<h4 id="3-priority-queue"><a href="#3-priority-queue" class="headerlink" title="3.priority_queue"></a>3.priority_queue</h4><p>priority_queue &#x3D;&#x3D;&gt; vector</p>
+<p>priority_queue：push入队 pop出队 top查看队顶元素 empty判断队空  size返回元素个数  </p>
+<p>默认：大根堆</p>
+<p>底层默认吧数据组成一个大根堆结构 在一个内存连续的数组上构建一个大根堆或者小根堆</p>
 
       
 
@@ -194,6 +220,17 @@
     <div class="article-info article-info-index">
       
       
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">c++STL</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
       
 
       
@@ -244,7 +281,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=https://restlessxxx.github.io/2024/02/20/text/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=https://restlessxxx.github.io/2024/04/14/c-%E6%A0%87%E5%87%86%E5%AE%B9%E5%99%A8-%E5%AE%B9%E5%99%A8%E9%80%82%E9%85%8D%E5%99%A8/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -258,18 +295,18 @@
   
 <nav id="article-nav">
   
-    <a href="/2024/02/21/mysql/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2024/04/19/c-%E5%85%B3%E8%81%94%E5%AE%B9%E5%99%A8-%E6%97%A0%E5%BA%8F%E5%85%B3%E8%81%94%E5%AE%B9%E5%99%A8/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          mysql
+          c++关联容器-无序关联容器
         
       </div>
     </a>
   
   
-    <a href="/2024/02/20/shell/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">shell编程</div>
+    <a href="/2024/04/13/c-%E6%A0%87%E5%87%86%E5%AE%B9%E5%99%A8-deque/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">c-标准容器-deque</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -399,7 +436,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">c++STL</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">c++ STL</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">linux</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -408,10 +453,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">shell</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">linux</a>
               </li>
              
               <li class="article-tag-list-item">
